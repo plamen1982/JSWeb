@@ -1,6 +1,7 @@
 const mongodb = require('mongodb');
 const  { MongoClient } = mongodb;
-let connectionStr = 'mongodb://localhost:27017';
+const connectionStr = 'mongodb://localhost:27017';
+
 const client = new MongoClient(connectionStr, { useNewUrlParser: true });
 client.connect((err) => {
     const db = client.db('newDB');
@@ -11,7 +12,11 @@ client.connect((err) => {
     //     console.log(result.toString())
     // });
 
-    letters.find({b: 'b'}).count().then((lettersB) => {
-        console.log(lettersB);
-    })
+    // letters.find({b: 'b'}).count().then((lettersB) => {
+    //     console.log(lettersB);
+    // })
+
+    // letters.deleteMany({}).then(onfullfilled => {
+    //     console.log(onfullfilled)
+    // })
 });
