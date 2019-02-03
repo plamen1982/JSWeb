@@ -8,7 +8,7 @@ const userSchema = new Schema({
     firstName: { type: String },
     lastName: { type: String },
     salt: { type: String, required: true },
-    roles: [{ type: String }]
+    roles: [{ type: String }],
 });
 
 userSchema.method({
