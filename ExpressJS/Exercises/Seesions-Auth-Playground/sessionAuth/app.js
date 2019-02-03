@@ -20,9 +20,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
 app.use(  
   session({
     name: 'set-Cookie-id',
@@ -31,8 +28,12 @@ app.use(
     resave: true,
     cookie: {
       maxAge: 10000,
-    }
+    },
+
 }));
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

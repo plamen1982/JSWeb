@@ -12,8 +12,16 @@ function generateHashPassword(salt, password) {
 }
 
 router.get('/', (req, res, next) => {
-
-  res.render('index', { title: 'Express' });
+  console.log(req.session)
+  if(req.session.views) {
+    req.session.views++;
+    res.setHeader('Content-Type', 'text/html')
+    res.write('<p>views: ' + req.session.views + '</p>')
+    res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>')
+    res.end()
+  } else {
+    req.session.views = 1;
+  }
 });
 
 router.get('/setCookie', (req, res, next) => {
