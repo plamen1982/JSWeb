@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 const encryption = require('../util/encryption');
 
 const userSchema = new Schema({
-    username: String,
+    username: { type: String },
     hashedPass: { type: String, required: true },
     firstName: { type: String },
     lastName: { type: String },
