@@ -1,9 +1,8 @@
-//TODO: try to remove 'use strict' after tutorial works
-'use strict';
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 
 // PAYLOAD
+
 const payload = {
     myPersonalTestData: 'My personal test data',
     myPersonalTestData1: 'My personal test data1',
@@ -20,6 +19,7 @@ const s  = 'some@user.com';        // Subject
 const a  = 'http://mysoftcorp.in'; // Audience
 
 // SIGNING OPTIONS
+
 const signOptions = {
  issuer:  i,
  subject:  s,
@@ -29,17 +29,20 @@ const signOptions = {
 };
 
 let token = jwt.sign(payload, privateKEY, signOptions);
-// console.log(token)
-// const verifyOptions = {
-//     issuer:  i,
-//     subject:  s,
-//     audience:  a,
-//     expiresIn:  "12h",
-//     algorithm:  ["HS256"],
-// };
+console.log(token)
+const verifyOptions = {
+    issuer:  i,
+    subject:  s,
+    audience:  a,
+    expiresIn:  "12h",
+    algorithms:  ["HS256"],
+};
 
-// const legit = jwt.verify(token, verifyOptions, verifyOptions);
+jwt.verify(token,publicKEY, verifyOptions, (err, decoded) => { 
+    if(err) throw err;
+    console.log(decoded);
+});
 // console.log(legit)
 
 var decoded =  jwt.decode(token, {complete: true});
-console.log("\nDecoded jwt: "+ JSON.stringify(decoded));
+// console.log("\nDecoded jwt: "+ JSON.stringify(decoded));
