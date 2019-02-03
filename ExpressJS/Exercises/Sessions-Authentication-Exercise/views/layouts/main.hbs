@@ -25,11 +25,16 @@
                 <li class="align-left">
                     <a href="/user/rents">My Rented Cars</a>
                 </li>
-                {{/if}} {{#if isAdmin}}
+                {{/if}} 
+                {{#if isAdmin}}
                 <li class="align-left">
                     <a href="/car/add">Add Car</a>
                 </li>
-                {{/if}} {{#if user}}
+                {{/if}} 
+                <li class="align-left first">
+                    <a href="/about">About</a>
+                </li>
+                {{#if user}}
                 <li class="align-right">
                     <form id="logout-form" action="/user/logout" method="POST">
                         <a href="javascript:document.getElementById('logout-form').submit()">Logout</a>
@@ -61,7 +66,8 @@
         <div id="errorBox">
             <h2>{{error}}</h2>
         </div>
-        {{/if}} {{{body}}}
+        {{/if}} 
+        {{{body}}}
     </main>
 
     <footer>
