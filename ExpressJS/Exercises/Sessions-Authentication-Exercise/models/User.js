@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const { Types: { ObjectId } } = Schema;
 const encryption = require('../util/encryption');
 
 const userSchema = new Schema({
@@ -9,6 +10,8 @@ const userSchema = new Schema({
     lastName: { type: String },
     salt: { type: String, required: true },
     roles: [{ type: String }],
+    isAdmin: { type: Boolean, default: false },
+    cars: [{ type: ObjectId, ref: 'Car' }],
 });
 
 userSchema.method({
