@@ -25,8 +25,27 @@ module.exports = {
         })
         .catch(console.error);
     },
-    rent: (req, res) => {
+    rentGet: (req, res) => {
+        const carId = req.params.id;
 
+        Car.findById(carId)
+            .then((car) => {
+                res.render('car/rent', car);
+            })
+    },
+    rentPost: (req, res) => {
+        const carId = req.params.id;
+        //req.user is comming from passport.js with the whole user object
+        const userId = req.user._id;
+        const days = Number(req.body.days);
+
+        Rent.create({
+            days,
+            user: userId,
+            car: carId,
+        }).then(() => {
+            res.redirect('/car/all');
+        }).catch(console.error)
     },
     editGet: (req, res) => {
 

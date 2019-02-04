@@ -41,12 +41,13 @@ module.exports = app => {
 
     //=============================== Cars Rented By Id ========================================//
 
-    app.get('/cars/rent/:id', restrictedPages.isAuthed, carController.rent);
+    app.get('/car/rent/:id', restrictedPages.isAuthed, carController.rentGet);
+    app.post('/car/rent/:id', restrictedPages.isAuthed, carController.rentPost);
 
     //=============================== Cars Edited By Id ========================================//
 
-    app.get('/cars/edit/:id', restrictedPages.hasRole('admin'), carController.editGet);
-    app.post('/cars/edit/:id', restrictedPages.hasRole('admin'), carController.editPost);
+    app.get('/car/edit/:id', restrictedPages.hasRole('admin'), carController.editGet);
+    app.post('/car/edit/:id', restrictedPages.hasRole('admin'), carController.editPost);
 
     //=============================== Everything Else ==========================================//
 
