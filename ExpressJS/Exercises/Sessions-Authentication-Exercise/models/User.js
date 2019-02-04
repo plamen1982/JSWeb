@@ -17,6 +17,15 @@ const userSchema = new Schema({
 userSchema.method({
     authenticate: function (password) {
         return encryption.generateHashedPassword(this.salt, password) === this.hashedPass;
+    },
+    isUsernameExist: async function(username) {
+        const user = this;
+        const findUsername = await user.find({ username });
+        if(findUsername.username) {
+            throw new Error('Username already exist.')
+        } else {
+            return false;
+        }
     }
 });
 

@@ -15,35 +15,31 @@ module.exports = {
         }
         const hashedPass = encryption.generateHashedPassword(salt, password);
         try {
-            const repeatedUser =  await User.find({ username });
-            console.log(repeatedUser);
-            if(repeatedUser.username) {
-                res.locals.error = 'The user already exist';
-                res.render('users/register', reqUser);
-            }
-            else {
-                const user = await User.create({
-                    username,
-                    hashedPass,
-                    salt,
-                    firstName,
-                    lastName,
-                    roles: ['user'],
-                });
-                req.logIn(user, (error, user) => {
-                    if(error) {
-                        res.locals.error = error;
-                        res.render('user/register', user);
-                    } else {
-                        res.redirect('/');
-                    }
-                })
-            }
-
+            const user = await User.create({
+                username,
+                hashedPass,
+                salt,
+                firstName,
+                lastName,
+                roles: ['user'],
+            });
+            req.logIn(user, (error, user) => {
+                if(error) {
+                    res.locals.error = error;
+                    res.render('user/register', user);
+                } else {
+                    res.redirect('/');
+                }
+            })
+            
         } catch(error) {
-            console.log(error);
-            res.locals.error = error;
-            res.render('user/register', reqUser);
+            if(error.code === 11000) {
+                res.locals.error = 'Username already exist';
+                res.render('user/register', reqUser);
+            } else {
+                res.locals.error = error;
+                res.render('user/register', reqUser);
+            }
         }
     },
     logout: (req, res) => {
