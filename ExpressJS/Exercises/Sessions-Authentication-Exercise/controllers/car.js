@@ -8,7 +8,15 @@ module.exports = {
         res.render('car/add');
     },
     addPost: (req, res) => {
-        res.render('car/add');
+        //TODO validation for input fields
+        const carBody = req.body;
+        carBody.pricePerDay = Number(carBody.pricePerDay);
+
+        Car.create(carBody) 
+            .then(() => {
+                res.redirect('/')
+            })
+            .catch(console.error)
     },
     allCars: (req, res) => {
         res.render('car/all');
