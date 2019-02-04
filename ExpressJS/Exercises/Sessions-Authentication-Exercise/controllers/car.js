@@ -5,7 +5,6 @@ const User = require('../models/User');
 module.exports = {
 
     addGet: (req, res) => {
-        console.log(console.log('ADD GET--------------------'))
         res.render('car/add');
     },
     addPost: (req, res) => {
