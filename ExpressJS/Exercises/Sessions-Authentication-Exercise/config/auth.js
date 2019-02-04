@@ -7,6 +7,7 @@ module.exports = {
         }
     },
     hasRole: (role) => (req, res, next) => {
+        
         if (req.isAuthenticated() &&
             req.user.roles.indexOf(role) > -1) {
             next();

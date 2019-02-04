@@ -58,24 +58,28 @@ module.exports = {
         const reqUser = req.body;
         const { username, password } = reqUser;
         try {
-            const currentUser = await User.findOne({ username });
-            if(!currentUser.authenticate(password)) {
-               res.locals.error = 'Password does not matched.';
+            const user = await User.findOne({ username });
+            if(!user) {
+                reqUser.error = 'Invalid username';
+                res.render('user/login', reqUser);
+            }
+            if(!user.authenticate(password)) {
+               reqUser.error = 'Invalid password';
                res.render('user/login', reqUser);
                return;
             }
-            req.logIn(currentUser, (error, currentUser) => {
+            req.logIn(user, function(error) {
                 if(error) {
-                    res.locals.error = 'Something when wrong';
-                    res.render('user/login', currentUser);
+                    reqUser.error = 'Something when wrong';
+                    res.render('user/login', reqUser);
                     return;
                 } else {
-                    res.redirect('/')
+                    res.redirect('/');
                 }
             });
         } catch(error) {
             console.log(error);
-            res.locals.error = 'Username does not matched.';
+            reqUser.error = error;
             res.render('user/login', reqUser);
         }
     }
