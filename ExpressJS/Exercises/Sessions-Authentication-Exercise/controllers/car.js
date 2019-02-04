@@ -19,7 +19,7 @@ module.exports = {
             .catch(console.error)
     },
     allCars: (req, res) => {
-        Car.find({})
+        Car.find({ isRented: false })
         .then((cars) => {
             res.render('car/all', { cars });
         })
@@ -44,7 +44,13 @@ module.exports = {
             user: userId,
             car: carId,
         }).then(() => {
-            res.redirect('/car/all');
+            Car.findById(carId).then((rentedCar) => {
+                rentedCar.isRented = true;
+                 return rentedCar.save();
+            })
+            .then(() => {
+                res.redirect('/car/all');
+            });
         }).catch(console.error)
     },
     editGet: (req, res) => {

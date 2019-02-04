@@ -7,7 +7,7 @@ const carSchema = new Schema({
     year: { type: String },
     carUrl: { type: String, required: true },
     pricePerDay: { type: Number, required: true },
-    rent: { type: Boolean, default: false },
+    isRented: { type: Boolean, default: false },
 });
 
 module.exports = model('Car', carSchema);
