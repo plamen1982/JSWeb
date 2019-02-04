@@ -37,7 +37,7 @@ module.exports = app => {
 
     //=============================== All Cars =================================================//
 
-    app.get('/cars/all', carController.allCars);
+    app.get('/car/all', carController.allCars);
 
     //=============================== Cars Rented By Id ========================================//
 

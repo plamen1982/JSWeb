@@ -19,7 +19,11 @@ module.exports = {
             .catch(console.error)
     },
     allCars: (req, res) => {
-        res.render('car/all');
+        Car.find({})
+        .then((cars) => {
+            res.render('car/all', { cars });
+        })
+        .catch(console.error);
     },
     rent: (req, res) => {
 
