@@ -3,25 +3,23 @@ const Rent = require('../models/Rent');
 const User = require('../models/User');
 
 module.exports = {
-    addCarGet: (req, res) => {
+
+    addGet: (req, res) => {
         res.render('car/add');
     },
-    allCarsGet: (req, res) => {
+    addPost: (req, res) => {
+        res.render('car/add');
+    },
+    allCars: (req, res) => {
         res.render('car/all');
     },
-    rentCarDetals: (req, res) => {
+    rent: (req, res) => {
 
     },
-    rentCar: (req, res) => {
+    editGet: (req, res) => {
 
     },
-    myRentedCars: (req, res) => {
-
-    },
-    editedCarView: (req, res) => {
-
-    },
-    editedCar: (req, res) => {
+    editPost: (req, res) => {
 
     },
 };

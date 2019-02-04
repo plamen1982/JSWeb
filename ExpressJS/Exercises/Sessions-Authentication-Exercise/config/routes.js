@@ -32,8 +32,8 @@ module.exports = app => {
 
     //=============================== Add Car ==================================================//
 
-    app.get('/cars/add', restrictedPages.hasRole('admin'), carController.addCarGet);
-    app.post('/cars/add', restrictedPages.hasRole('admin'), carController.addCarPost);
+    app.get('/cars/add', restrictedPages.hasRole('admin'), carController.addGet);
+    app.post('/cars/add', restrictedPages.hasRole('admin'), carController.addPost);
 
     //=============================== All Cars =================================================//
 
