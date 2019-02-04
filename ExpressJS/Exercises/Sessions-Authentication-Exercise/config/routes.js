@@ -1,5 +1,6 @@
 const restrictedPages = require('./auth');
 const homeController = require('../controllers/home');
+const userController = require('../controllers/user');
 
 module.exports = app => {
 
@@ -11,10 +12,10 @@ module.exports = app => {
 
     app.get('/about', homeController.about);
 
-    //=============================== Register =================================================//
+    //=============================== Register User=================================================//
 
-    app.get('/register');
-    app.post('/register');
+    app.get('/user/register', userController.registerGet);
+    app.post('/user/register', userController.registerPost);
 
     //=============================== Logout ===================================================//
 
@@ -22,8 +23,8 @@ module.exports = app => {
 
     //=============================== Login ====================================================//
 
-    app.get('/login');
-    app.post('/login');
+    app.get('/user/login', userController.loginGet);
+    app.post('/user/login');
 
     //=============================== Add Car ==================================================//
 

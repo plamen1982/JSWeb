@@ -1,6 +1,6 @@
 module.exports = {
     registerGet: (req, res) => {
-        // TODO:
+        res.render('user/register');
     },
     registerPost: async (req, res) => {
        // TODO:
@@ -9,7 +9,7 @@ module.exports = {
         // TODO:
     },
     loginGet: (req, res) => {
-        // TODO:
+        res.render('user/login');
     },
     loginPost: async (req, res) => {
         // TODO:

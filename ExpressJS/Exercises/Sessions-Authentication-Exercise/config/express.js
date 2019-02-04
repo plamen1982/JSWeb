@@ -6,11 +6,7 @@ const session = require('express-session');
 const passport = require('passport');
 
 module.exports = app => {
-    app.engine('.hbs', handlebars({
-        defaultLayout: 'main',
-        extname: '.hbs'
-    }));
-
+    
     app.use(cookieParser());
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(session({
@@ -34,6 +30,11 @@ module.exports = app => {
         }
         next();
     });
+
+    app.engine('.hbs', handlebars({
+        defaultLayout: 'main',
+        extname: '.hbs'
+    }));
 
     app.set('view engine', '.hbs');
 
