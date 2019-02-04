@@ -5,7 +5,7 @@ const { Types: { ObjectId } } = Schema;
 const rentSchema = new Schema({
     car: { type: ObjectId, required: true, ref: 'Car' },
     user: { type: ObjectId, required: true, ref: 'User' },
-    date: { type: Date, required: true, },
+    date: { type: Date },
     days: { type: Number, required: true, },
 });
 
