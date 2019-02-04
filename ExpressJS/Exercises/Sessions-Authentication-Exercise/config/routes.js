@@ -12,7 +12,7 @@ module.exports = app => {
 
     app.get('/about', homeController.about);
 
-    //=============================== Register User=================================================//
+    //=============================== Register User=============================================//
 
     app.get('/user/register', userController.registerGet);
     app.post('/user/register', userController.registerPost);
@@ -24,7 +24,11 @@ module.exports = app => {
     //=============================== Login ====================================================//
 
     app.get('/user/login', userController.loginGet);
-    app.post('/user/login');
+    app.post('/user/login', userController.loginPost);
+
+    //=============================== Get User By Id ===========================================//
+
+    app.get('/users/:id');
 
     //=============================== Add Car ==================================================//
 
@@ -35,16 +39,12 @@ module.exports = app => {
 
     app.get('/cars/all');
 
-    //=============================== Get User By Id ============================================//
-
-    app.get('/users/:id');
-
-    //=============================== Cars Rented By Id ==========================================//
+    //=============================== Cars Rented By Id ========================================//
 
     app.get('/cars/rent/:id');
     app.post('/cars/rent/:id');
 
-    //=============================== Everything Else ============================================//
+    //=============================== Everything Else ==========================================//
 
     app.all('*', (req, res) => {
         res.status(404);
