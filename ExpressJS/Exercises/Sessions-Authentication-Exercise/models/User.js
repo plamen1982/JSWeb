@@ -4,7 +4,7 @@ const { Types: { ObjectId } } = Schema;
 const encryption = require('../util/encryption');
 
 const userSchema = new Schema({
-    username: { type: String },
+    username: { type: String, required: true, unique: true },
     hashedPass: { type: String, required: true },
     firstName: { type: String },
     lastName: { type: String },

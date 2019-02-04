@@ -15,30 +15,40 @@ module.exports = {
         }
         const hashedPass = encryption.generateHashedPassword(salt, password);
         try {
-            const user = await User.create({
-                username,
-                hashedPass,
-                salt,
-                firstName,
-                lastName,
-                roles: ['user'],
-            });
-            req.logIn(user, (error, user) => {
-                if(error) {
-                    res.locals.error = error;
-                    res.render('users/register', user);
-                } else {
-                    res.redirect('/');
-                }
-            })
+            const repeatedUser =  await User.find({ username });
+            console.log(repeatedUser);
+            if(repeatedUser.username) {
+                res.locals.error = 'The user already exist';
+                res.render('users/register', reqUser);
+            }
+            else {
+                const user = await User.create({
+                    username,
+                    hashedPass,
+                    salt,
+                    firstName,
+                    lastName,
+                    roles: ['user'],
+                });
+                req.logIn(user, (error, user) => {
+                    if(error) {
+                        res.locals.error = error;
+                        res.render('user/register', user);
+                    } else {
+                        res.redirect('/');
+                    }
+                })
+            }
+
         } catch(error) {
             console.log(error);
             res.locals.error = error;
-            res.render('users/register');
+            res.render('user/register', reqUser);
         }
     },
     logout: (req, res) => {
-        // TODO:
+        req.logout();
+        res.redirect('/');
     },
     loginGet: (req, res) => {
         res.render('user/login');
