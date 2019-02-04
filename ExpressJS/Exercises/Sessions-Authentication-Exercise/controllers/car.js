@@ -3,11 +3,11 @@ const Rent = require('../models/Rent');
 const User = require('../models/User');
 
 module.exports = {
-    createCar: (req, res) => {
-
+    addCarGet: (req, res) => {
+        res.render('car/add');
     },
-    allCars: (req, res) => {
-
+    allCarsGet: (req, res) => {
+        res.render('car/all');
     },
     rentCarDetals: (req, res) => {
 
@@ -22,6 +22,6 @@ module.exports = {
 
     },
     editedCar: (req, res) => {
-        
+
     },
 };

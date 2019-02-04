@@ -1,7 +1,7 @@
 const restrictedPages = require('./auth');
 const homeController = require('../controllers/home');
 const userController = require('../controllers/user');
-
+const carController = require('../controllers/car');
 module.exports = app => {
 
     //=============================== Home =====================================================//
@@ -14,8 +14,8 @@ module.exports = app => {
 
     //=============================== Register User=============================================//
 
-    app.get('/user/register', userController.registerGet);
-    app.post('/user/register', userController.registerPost);
+    app.get('/user/register', restrictedPages.isAnonymous, userController.registerGet);
+    app.post('/user/register', restrictedPages.isAnonymous, userController.registerPost);
 
     //=============================== Logout ===================================================//
 
@@ -23,8 +23,8 @@ module.exports = app => {
 
     //=============================== Login ====================================================//
 
-    app.get('/user/login', userController.loginGet);
-    app.post('/user/login', userController.loginPost);
+    app.get('/user/login', restrictedPages.isAnonymous, userController.loginGet);
+    app.post('/user/login', restrictedPages.isAnonymous, userController.loginPost);
 
     //=============================== Get User By Id ===========================================//
 
@@ -32,23 +32,27 @@ module.exports = app => {
 
     //=============================== Add Car ==================================================//
 
-    app.get('/cars/add');
-    app.post('/cars/add');
+    app.get('/cars/add', restrictedPages.hasRole('admin'), carController.addCarGet);
+    app.post('/cars/add', restrictedPages.hasRole('admin'), carController.addCarPost);
 
     //=============================== All Cars =================================================//
 
-    app.get('/cars/all');
+    app.get('/cars/all', carController.allCars);
 
     //=============================== Cars Rented By Id ========================================//
 
-    app.get('/cars/rent/:id');
-    app.post('/cars/rent/:id');
+    app.get('/cars/rent/:id', restrictedPages.isAuthed, carController.rent);
+
+    //=============================== Cars Edited By Id ========================================//
+
+    app.get('/cars/edit/:id', restrictedPages.hasRole('admin'), carController.editGet);
+    app.post('/cars/edit/:id', restrictedPages.hasRole('admin'), carController.editPost);
 
     //=============================== Everything Else ==========================================//
 
     app.all('*', (req, res) => {
         res.status(404);
-        res.send('404 Not Found');
+        res.send('The route does not exist, please check');
         res.end();
     });
 };
