@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const encryption = require('../util/encryption');
-const { Schema } = mongoose;
-const { Types: { ObjectId, String } } = Schema;
+
 const userSchema = new mongoose.Schema({
-    email: { type: String, required: true, unique: true },
-    hashedPass: { type: String, required: true },
-    salt: { type: String, required: true },
-    roles: [{ type: String }],
-    edits: [{ type: ObjectId, ref: 'Edit' }]
+    email: { type: Schema.Types.String, required: true, unique: true },
+    hashedPass: { type: Schema.Types.String, required: true },
+    salt: { type: Schema.Types.String, required: true },
+    roles: [{ type: Schema.Types.String }],
+    edits: [ { type: Schema.Types.ObjectId, ref: 'Edit' } ]
 });
 
 userSchema.method({
@@ -23,9 +23,9 @@ User.seedAdminUser = async () => {
         let users = await User.find();
         if (users.length > 0) return;
         const salt = encryption.generateSalt();
-        const hashedPass = encryption.generateHashedPassword(salt, 'Admin');
+        const hashedPass = encryption.generateHashedPassword(salt, '123');
         return User.create({
-            username: 'Admin',
+            email: 'admin@abv.bg',
             salt,
             hashedPass,
             roles: ['Admin']
