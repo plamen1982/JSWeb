@@ -6,4 +6,6 @@ const app = require('express')();
 require('./config/express')(app);
 require('./config/routes')(app);
 require('./config/passport')();
-app.listen(config.port);
+app.listen(config.port, () => {
+    console.log(`server is listening on port:${config.port}`)
+});
