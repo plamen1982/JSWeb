@@ -15,6 +15,8 @@ module.exports = app => {
     app.post('/article/create', restrictedPages.isAuthed, controllers.article.createPost);
     app.get('/article/all', controllers.article.getAll);
     app.get('/article/details/:id', controllers.article.displayArticle);
+    app.get('/article/edit/:id', restrictedPages.isAuthed, controllers.article.editGet);
+    app.post('/article/edit/:id', restrictedPages.isAuthed, controllers.article.editPost);
 
     app.get('')
     app.all('*', (req, res) => {
