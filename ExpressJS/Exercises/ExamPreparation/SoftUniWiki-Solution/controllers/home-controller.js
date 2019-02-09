@@ -1,4 +1,5 @@
 const Article = require('../models/Article');
+
 module.exports = {
     index: (req, res) => {
         Article
@@ -27,5 +28,21 @@ module.exports = {
                 res.render('home/index', context);
             })
             .catch(console.error);
-    }
+    },
+    search: (req, res) => {
+        const { query } = req.query;
+
+        Article.find({ })
+            .then((articles) => {
+                const filteredArticles = articles.filter((a) => {
+                    return a.title.toLowerCase().includes(query.toLowerCase());
+                });
+                const context = {
+                    query: query,
+                    articles: filteredArticles
+                };
+                res.render('home/search', context);
+            })
+            .catch(console.error);
+    },
 };

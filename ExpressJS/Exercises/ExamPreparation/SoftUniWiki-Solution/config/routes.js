@@ -3,7 +3,8 @@ const restrictedPages = require('./auth');
 
 module.exports = app => {
     app.get('/', controllers.home.index);
-
+    app.get('/search', controllers.home.search);
+    
     app.get('/register', restrictedPages.isAnonymous, controllers.user.registerGet);
     app.post('/register', restrictedPages.isAnonymous, controllers.user.registerPost);
     app.get('/logout', restrictedPages.isAuthed, controllers.user.logout);

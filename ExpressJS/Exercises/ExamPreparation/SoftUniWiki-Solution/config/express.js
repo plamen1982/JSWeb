@@ -22,8 +22,12 @@ module.exports = app => {
     app.use(passport.session());
 
     app.use((req, res, next) => {
-        if (req.user) {
+        if(req.user) {
             res.locals.currentUser = req.user;
+            res.locals.email = req.user.email;
+            if (req.user.roles) {
+                res.locals.isAdmin = req.user.roles.indexOf('Admin') > - 1;
+            }
         }
         next();
     });
