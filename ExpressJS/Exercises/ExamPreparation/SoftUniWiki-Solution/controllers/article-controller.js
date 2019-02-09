@@ -41,7 +41,7 @@ module.exports = {
 
     Promise.all([ Article.create(articleData), Edit.create(editData) ])
         .then(( [ article, edit ] ) => {
-            
+
             //add id's to different records
             edit.article = article._id;
             article.edits.push(edit._id);
@@ -57,6 +57,15 @@ module.exports = {
                 res.redirect('/');
             })
             .catch(console.error)
+        })
+  },
+  getAll: (req, res) => {
+      Article
+        .find()
+        .sort({ title: 'ascending' })
+        .select('_id title')
+        .then(articles => {
+            res.render('article/all-articles', { articles });
         })
   }
 };

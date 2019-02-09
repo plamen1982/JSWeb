@@ -13,6 +13,7 @@ module.exports = app => {
 //================================================ Article ================================================================//
     app.get('/article/create', restrictedPages.isAuthed, controllers.article.createGet);
     app.post('/article/create', restrictedPages.isAuthed, controllers.article.createPost);
+    app.get('/article/all', controllers.article.getAll);
 
     app.get('')
     app.all('*', (req, res) => {
