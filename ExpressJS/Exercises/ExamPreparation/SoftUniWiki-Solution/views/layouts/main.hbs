@@ -30,7 +30,7 @@
         <div id="container">
             <header>
                 {{#if currentUser}}
-                      <span>Welcome, {{email}}!</span>
+                      <span>Welcome, {{currentUser.email}}!</span>
                       <a href="/logout">[Logout]</a>
                 {{else}}
                     <a href="/login">Login</a>
