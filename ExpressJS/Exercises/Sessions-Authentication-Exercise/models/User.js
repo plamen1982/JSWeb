@@ -11,7 +11,7 @@ const userSchema = new Schema({
     salt: { type: String, required: true },
     roles: [{ type: String }],
     isAdmin: { type: Boolean, default: false },
-    cars: [{ type: ObjectId, ref: 'Car' }],
+    rents: [{ type: ObjectId, ref: 'Rent' }],
 });
 
 userSchema.method({

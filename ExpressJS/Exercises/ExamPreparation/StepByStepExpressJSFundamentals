@@ -1,0 +1,24 @@
+#Work with a skeleton
+#Copy-paste css in static folder
+#Copy-paste temlates and add them to sub folders
+#Create User Reggistration/Admin logic (register/login with and email instead of username)
+#CreateArticle and Edit Models 
+    -User should have edits
+    -Article should have title, content, isLocked, creationDate. edits
+    -Edit should have author (User), creationDate, content, article
+#Implement Article Create (for auth)
+    -Create and Article and a first Edit for that Article(reference both models)
+    -Add the new Edit to the user edits array
+#Implement index page to list all articles
+    -Sort by creation date desc
+    -limit to 3
+    -Select only _id and title
+    -Slice content to first 50 words
+#Implement all articles page(for auth)
+    -Sort by title ascending
+    -Select id and title
+#Article History
+    -Populate edits for each edit populate author
+#Search
+    -Search by query string 
+
