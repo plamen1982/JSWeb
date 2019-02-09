@@ -55,6 +55,7 @@ module.exports = {
                     errorHandler(err);
                 } else {
                     res.redirect('/');
+                    return;
                 }
             });
         } catch (e) {
