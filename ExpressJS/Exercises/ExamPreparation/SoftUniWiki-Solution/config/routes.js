@@ -11,7 +11,8 @@ module.exports = app => {
     app.post('/login', restrictedPages.isAnonymous, controllers.user.loginPost);
 
 //================================================ Article ================================================================//
-    app.get('/article/create', restrictedPages.isAuthed, controllers.article.createGet)
+    app.get('/article/create', restrictedPages.isAuthed, controllers.article.createGet);
+    app.post('/article/create', restrictedPages.isAuthed, controllers.article.createPost);
 
     app.get('')
     app.all('*', (req, res) => {
