@@ -12,11 +12,9 @@ module.exports = {
             encryption.generateHashedPassword(salt, reqUser.password);
         try {
             const user = await User.create({
-                username: reqUser.username,
+                email: reqUser.email,
                 hashedPass,
                 salt,
-                firstName: reqUser.firstName,
-                lastName: reqUser.lastName,
                 roles: []
             });
             req.logIn(user, (err, user) => {
@@ -43,7 +41,7 @@ module.exports = {
     loginPost: async (req, res) => {
         const reqUser = req.body;
         try {
-            const user = await User.findOne({ username: reqUser.username });
+            const user = await User.findOne({ email: reqUser.email });
             if (!user) {
                 errorHandler('Invalid user data');
                 return;

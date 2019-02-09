@@ -12,9 +12,9 @@
         <header>
             <ul class="menu">
                 <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
+                <li><a href="/">About</a></li>
                 {{#if currentUser}}
-                <li>{{currentUser.username}}</li>
+                <li>{{currentUser.email}}</li>
                 <li>
                     <form id="logout-form" action="/logout" method="post"></form>
                     <a href="javascript:document.getElementById('logout-form').submit()">Logout</a>
