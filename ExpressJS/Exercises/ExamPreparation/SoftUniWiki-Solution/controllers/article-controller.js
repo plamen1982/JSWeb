@@ -67,5 +67,20 @@ module.exports = {
         .then(articles => {
             res.render('article/all-articles', { articles });
         })
+  },
+  displayArticle: (req, res) => {
+      const { id } = req.params;
+      Article
+        .findById(id)
+        .populate('edits')
+        .then(article => {
+            const edits = article.edits;
+            let splitedContent = edits[edits.length - 1]
+                                        .content
+                                        .split('\r\n\r\n');
+            article.splitedContent = splitedContent;
+            res.render('article/article', article)
+        })
+        .catch(console.error);
   }
 };
