@@ -3,44 +3,50 @@ import ReactDOM from "react-dom";
 import "./style/index.css";
 import "./style/app.css";
 
+const MainHeader = () => ( 
+  <header>&#9993; Contact Book</header>
+);
+const DetailsHeader = () => ( <div></div>);
+const ContactCard = () => (<div></div>);
+const DetailsSection = () => (<div></div>);
 const Page = () => (
-  <div class="container">
-    <header>&#9993; Contact Book</header>
+  <div className="container">
+    <MainHeader />
     <div id="book">
         <div id="list">
             <h1>Contacts</h1>
-            <div class="content">
-                <div class="contact" data-id="id">
-                    <span class="avatar small">&#9787;</span>
-                    <span class="title">Ivan Ivanov</span>
+            <div className="content">
+                <div className="contact" data-id="id">
+                    <span className="avatar small">&#9787;</span>
+                    <span className="title">Ivan Ivanov</span>
                 </div>
 
-                <div class="contact" data-id="id">
-                    <span class="avatar small">&#9787;</span>
-                    <span class="title">Jordan Kirov</span>
+                <div className="contact" data-id="id">
+                    <span className="avatar small">&#9787;</span>
+                    <span className="title">Jordan Kirov</span>
                 </div>
 
-                <div class="contact" data-id="id">
-                    <span class="avatar small">&#9787;</span>
-                    <span class="title">Maria Petrova</span>
+                <div className="contact" data-id="id">
+                    <span className="avatar small">&#9787;</span>
+                    <span className="title">Maria Petrova</span>
                 </div>
             </div>
         </div>
         <div id="details">
             <h1>Details</h1>
-            <div class="content">
-                <div class="info">
-                    <div class="col">
-                        <span class="avatar">&#9787;</span>
+            <div className="content">
+                <div className="info">
+                    <div className="col">
+                        <span className="avatar">&#9787;</span>
                     </div>
-                    <div class="col">
-                        <span class="name">Ivan</span>
-                        <span class="name">Ivanov</span>
+                    <div className="col">
+                        <span className="name">Ivan</span>
+                        <span className="name">Ivanov</span>
                     </div>
                 </div>
-                <div class="info">
-                    <span class="info-line">&phone; 0887 123 456</span>
-                    <span class="info-line">&#9993; i.ivanov@gmail.com</span>
+                <div className="info">
+                    <span className="info-line">&phone; 0887 123 456</span>
+                    <span className="info-line">&#9993; i.ivanov@gmail.com</span>
                 </div>
             </div>
         </div>
