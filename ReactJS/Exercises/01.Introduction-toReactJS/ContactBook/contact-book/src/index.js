@@ -2,25 +2,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-const WelcomeStranger = () => (
-    <h1>Welcome, stranger!</h1>
+const Header = () => (
+    <header>
+            <Logo />
+            <Menu />
+            <Search />
+    </header>
+);
+const Menu = () => (
+    <ul>
+        <li>Home</li>
+        <li>Contact us</li>
+        <li>Our Bussiness</li>
+    </ul>
+);
+const Logo = () => (
+    <img width="40" height="30" alt="our crazy good logo" src="data:image/jpeg;base64,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"></img>
+);
+const Search = () => (
+    <input type="text" placeholder="search for our services" />
 );
 
-const HelloDearFellow = ({moneyOfTheStranger}) => (
-    <div>
-        <h2>Hello, dear fellow!</h2>
-        <h3>I have some money to spend. Exactly ${moneyOfTheStranger}</h3>
-    </div>
-);
 
-const ComponentBlender = () => (
-    <div>
-        <WelcomeStranger />
-        <HelloDearFellow moneyOfTheStranger={5 * 80} />
-    </div>
-);
-
-
-ReactDOM.render(<ComponentBlender />, document.getElementById('root'));
+ReactDOM.render(<Header />, document.getElementById('root'));
 
 
