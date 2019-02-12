@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Projects Manager</title>
+    <link href="/css/site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        {{!-- <form action="/searchTeam" method="GET">
+            <input type="text" name="query">
+            <input type="submit" value="Search">
+        </form>
+        <form action="/searchProject" method="GET">
+            <input type="text" name="query">
+            <input type="submit" value="Search">
+        </form> --}}
+        <ul>
+            <div class="right">
+                {{#if currentUser}}
+                {{#if isAdmin}}
+                <li><a href="/">Home</a></li>
+                <li><a href="/admin/projects">Projects</a></li>
+                <li><a href="/admin/teams">Teams</a></li>
+                <li><a href="/createTeam">Create Team</a></li>
+                <li><a href="/createProject">Create Project</a></li>
+                <li>Welcome, {{currentUser.username}}!</li>
+                <li><a href="#">Profile</a></li>
+                <li>
+                    <form id="logout-form" action="/logout" method="post"></form>
+                    <a href="javascript:document.getElementById('logout-form').submit()">Logout</a>
+                </li>
+                {{else}}
+                <li><a href="/">Home</a></li>
+                <li><a href="/projects">Projects</a></li>
+                <li><a href="/teams">Teams</a></li>
+                <li>Welcome, {{currentUser.username}}!</li>
+                <li><a href="#">Profile</a></li>
+                <li>
+                    <form id="logout-form" action="/logout" method="post"></form>
+                    <a href="javascript:document.getElementById('logout-form').submit()">Logout</a>
+                </li>
+                {{/if}}
+
+                {{else}}
+                <li><a href="/">Home</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+                {{/if}}
+            </div>
+        </ul>
+    </header>
+    <main>
+        {{#if globalError}}
+        <span>{{globalError}}</span> {{/if}}
+        {{{body}}}
+    </main>
+
+    <footer>
+        Express Exam @SoftUni
+    </footer>
+</body>
+
+</html>
+
+{{!--
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Demo Server</title>
+    <link href="/css/site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <ul class="menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                {{#if currentUser}}
+                <li>{{currentUser.username}}</li>
+                <li>
+                    <form id="logout-form" action="/logout" method="post"></form>
+                    <a href="javascript:document.getElementById('logout-form').submit()">Logout</a>
+                </li>
+                {{else}}
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+                {{/if}}
+            </ul>
+        </header>
+        <main>
+            {{#if globalError}}
+            <span>{{globalError}}</span> {{/if}} {{{body}}}
+        </main>
+    </div>
+</body>
+
+</html> --}}

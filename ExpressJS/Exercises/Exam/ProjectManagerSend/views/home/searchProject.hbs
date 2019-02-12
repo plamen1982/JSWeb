@@ -2,9 +2,9 @@
   <h2>Search results for: "{{query}}"</h2>
   <div class="spacer">
     <ul>
-      {{#each articles as |article|}}
+      {{#each projects as |project|}}
         <li>
-          <a href="/article/details/{{article._id}}">{{article.title}}</a>
+         {{project.name}}
         </li>
       {{/each}}
     </ul>
