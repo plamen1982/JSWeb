@@ -1,47 +1,52 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "./style/index.css";
+import "./style/app.css";
 
-let logoText = 'Logo';
+const Page = () => (
+  <div class="container">
+    <header>&#9993; Contact Book</header>
+    <div id="book">
+        <div id="list">
+            <h1>Contacts</h1>
+            <div class="content">
+                <div class="contact" data-id="id">
+                    <span class="avatar small">&#9787;</span>
+                    <span class="title">Ivan Ivanov</span>
+                </div>
 
-const handleNavLinkClick = (event) => {
-    event.preventDefault();
-    const text = event.target.innerText || event.target.value;
+                <div class="contact" data-id="id">
+                    <span class="avatar small">&#9787;</span>
+                    <span class="title">Jordan Kirov</span>
+                </div>
 
-    logoText = text;
-    ReactDOM.render(<Navigation />, document.getElementById("root"));
-}
-
-const Navigation = () => {
-
-  const siteNavClass = "site-nav";
-  const linkClassName = `${siteNavClass}--link`;
-
-  return (
-    <header className={linkClassName}>
-      <Logo />
-      <Menu />
-      <Search />
-    </header>
-  );
-};
-
-const Menu = () => (
-  <ul>
-    <li><a href='/' onClick={handleNavLinkClick}>Home</a></li>
-    <li><a href='/contact-us' onClick={handleNavLinkClick}>Contact us</a></li>
-    <li><a href='/our-services' onClick={handleNavLinkClick}>Our Services</a></li>
-  </ul>
+                <div class="contact" data-id="id">
+                    <span class="avatar small">&#9787;</span>
+                    <span class="title">Maria Petrova</span>
+                </div>
+            </div>
+        </div>
+        <div id="details">
+            <h1>Details</h1>
+            <div class="content">
+                <div class="info">
+                    <div class="col">
+                        <span class="avatar">&#9787;</span>
+                    </div>
+                    <div class="col">
+                        <span class="name">Ivan</span>
+                        <span class="name">Ivanov</span>
+                    </div>
+                </div>
+                <div class="info">
+                    <span class="info-line">&phone; 0887 123 456</span>
+                    <span class="info-line">&#9993; i.ivanov@gmail.com</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>Contact Book SPA &copy; 2017</footer>
+</div>
 );
 
-const Logo = () => (
-  <div>
-    <p>{logoText}</p>
-  </div>
-);
-
-const Search = () => (
-  <input type="text" placeholder="search for our services" onChange={handleNavLinkClick} />
-);
-
-ReactDOM.render(<Navigation />, document.getElementById("root"));
+ReactDOM.render(<Page />, document.getElementById("root"));
