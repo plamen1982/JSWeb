@@ -23,6 +23,7 @@ const ContactCard = () => (
     <span className="title">Maria Petrova</span>
   </div>
 );
+
 const DetailsSection = () => (
   <div id="details">
     <h1>Details</h1>
@@ -44,6 +45,10 @@ const DetailsSection = () => (
   </div>
 );
 
+const Footer = () => (
+  <footer>Contact Book SPA &copy; 2017</footer>
+);
+
 const Page = () => (
   <div className="container">
     <HeaderMain />
@@ -52,8 +57,8 @@ const Page = () => (
         <ContactCard />
       </ContactList>
       <DetailsSection />
-      <footer>Contact Book SPA &copy; 2017</footer>
     </div>
+    <Footer />
   </div>
 );
 
