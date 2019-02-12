@@ -3,56 +3,48 @@ import ReactDOM from "react-dom";
 import "./style/index.css";
 import "./style/app.css";
 
-const MainHeader = () => ( 
-  <header>&#9993; Contact Book</header>
+//reuse MainHeader to become just Header
+const HeaderMain = () => <header>&#9993; Contact Book</header>;
+const DetailsHeader = () => <div />;
+const ContactList = () => <div />;
+const ContactCard = () => (
+  <div className="contact" data-id="id">
+    <span className="avatar small">&#9787;</span>
+    <span className="title">Maria Petrova</span>
+  </div>
 );
-const DetailsHeader = () => ( <div></div>);
-const ContactCard = () => (<div></div>);
-const DetailsSection = () => (<div></div>);
+const DetailsSection = () => <div />;
+
 const Page = () => (
   <div className="container">
-    <MainHeader />
+    <HeaderMain />
     <div id="book">
-        <div id="list">
-            <h1>Contacts</h1>
-            <div className="content">
-                <div className="contact" data-id="id">
-                    <span className="avatar small">&#9787;</span>
-                    <span className="title">Ivan Ivanov</span>
-                </div>
-
-                <div className="contact" data-id="id">
-                    <span className="avatar small">&#9787;</span>
-                    <span className="title">Jordan Kirov</span>
-                </div>
-
-                <div className="contact" data-id="id">
-                    <span className="avatar small">&#9787;</span>
-                    <span className="title">Maria Petrova</span>
-                </div>
+      <div id="list">
+        <h1>Contacts</h1>
+        <div className="content" />
+          <ContactCard />
+      </div>
+      <div id="details">
+        <h1>Details</h1>
+        <div className="content">
+          <div className="info">
+            <div className="col">
+              <span className="avatar">&#9787;</span>
             </div>
-        </div>
-        <div id="details">
-            <h1>Details</h1>
-            <div className="content">
-                <div className="info">
-                    <div className="col">
-                        <span className="avatar">&#9787;</span>
-                    </div>
-                    <div className="col">
-                        <span className="name">Ivan</span>
-                        <span className="name">Ivanov</span>
-                    </div>
-                </div>
-                <div className="info">
-                    <span className="info-line">&phone; 0887 123 456</span>
-                    <span className="info-line">&#9993; i.ivanov@gmail.com</span>
-                </div>
+            <div className="col">
+              <span className="name">Ivan</span>
+              <span className="name">Ivanov</span>
             </div>
+          </div>
+          <div className="info">
+            <span className="info-line">&phone; 0887 123 456</span>
+            <span className="info-line">&#9993; i.ivanov@gmail.com</span>
+          </div>
         </div>
+      </div>
     </div>
     <footer>Contact Book SPA &copy; 2017</footer>
-</div>
+  </div>
 );
 
 ReactDOM.render(<Page />, document.getElementById("root"));
