@@ -7,7 +7,7 @@ const WelcomeStranger = () => (
 );
 
 const HelloDearFellow = () => (
-    <h2>Hello from dear fellow!</h2>
+    <h2>Hello, dear fellow!</h2>
 );
 
 const ComponentBlender = () => (
