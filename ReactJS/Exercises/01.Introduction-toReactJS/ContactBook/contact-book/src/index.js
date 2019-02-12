@@ -6,14 +6,17 @@ const WelcomeStranger = () => (
     <h1>Welcome, stranger!</h1>
 );
 
-const HelloDearFellow = () => (
-    <h2>Hello, dear fellow!</h2>
+const HelloDearFellow = ({moneyOfTheStranger}) => (
+    <div>
+        <h2>Hello, dear fellow!</h2>
+        <h3>I have some money to spend. Exactly ${moneyOfTheStranger}</h3>
+    </div>
 );
 
 const ComponentBlender = () => (
     <div>
         <WelcomeStranger />
-        <HelloDearFellow />
+        <HelloDearFellow moneyOfTheStranger={5 * 80} />
     </div>
 );
 
