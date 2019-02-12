@@ -1,7 +1,7 @@
 import React from 'react';
 
-const HelloMessage = (props) => (
+const App = (props) => (
   <div>Hello {props.name}</div>
-)
+);
 
-export default HelloMessage;
+export default App;
