@@ -15,8 +15,10 @@ code {
 
 header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
+  padding: 0 10px;
+  background-color: lightsalmon;
 }
 
 ul {
@@ -26,4 +28,9 @@ ul {
   flex: 1;
   padding: 0;
   margin: 0;
+}
+
+ul a {
+  text-decoration: none;
+  background-color: transparent;
 }
