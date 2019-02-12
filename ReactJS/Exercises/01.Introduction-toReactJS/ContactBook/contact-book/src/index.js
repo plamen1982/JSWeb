@@ -6,7 +6,7 @@ let logoText = 'Logo';
 
 const handleNavLinkClick = (event) => {
     event.preventDefault();
-    const text = event.target.innerText;
+    const text = event.target.innerText || event.target.value;
 
     logoText = text;
     ReactDOM.render(<Navigation />, document.getElementById("root"));
@@ -41,7 +41,7 @@ const Logo = () => (
 );
 
 const Search = () => (
-  <input type="text" placeholder="search for our services" />
+  <input type="text" placeholder="search for our services" onChange={handleNavLinkClick} />
 );
 
 ReactDOM.render(<Navigation />, document.getElementById("root"));
