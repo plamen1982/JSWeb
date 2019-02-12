@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import "./style/index.css";
 import "./style/app.css";
@@ -6,7 +6,19 @@ import "./style/app.css";
 //reuse MainHeader to become just Header
 const HeaderMain = () => <header>&#9993; Contact Book</header>;
 const DetailsHeader = () => <div />;
-const ContactList = () => <div />;
+
+class ContactList extends Component {
+  render() {
+    return (
+      <div id="list">
+        <h1>Contacts</h1>
+        <div className="content">
+          {this.props.children}
+        </div>
+      </div>
+    );
+  }
+} 
 const ContactCard = () => (
   <div className="contact" data-id="id">
     <span className="avatar small">&#9787;</span>
@@ -19,11 +31,9 @@ const Page = () => (
   <div className="container">
     <HeaderMain />
     <div id="book">
-      <div id="list">
-        <h1>Contacts</h1>
-        <div className="content" />
-          <ContactCard />
-      </div>
+      <ContactList>
+        <ContactCard />
+      </ContactList>
       <div id="details">
         <h1>Details</h1>
         <div className="content">
