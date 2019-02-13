@@ -27,9 +27,8 @@ const DetailsSection = () => (
 );
 
 class ContactList extends Component {
-  handleOnClick(event) {
-    event.preventDefault();
-    console.log(event);
+  handleOnClick(contact) {
+    console.log(contact);
   }
 
   render() {
@@ -51,18 +50,24 @@ class ContactList extends Component {
 }
 
 class ContactCard extends Component {
-  handleClick() {
+    constructor(props) {
+      super(props);
+
+      this.handleClick = this.handleClick.bind(this);
+    }
+
+  handleClick(event) {
+    event.preventDefault();
     this.props.eventClick(this.props.contact);
-    console.log('clicked')
   }
 
   render() {
     const { contact } = this.props;
 
     return (
-      <div href="/" className="contact" data-id="id">
+      <div className="contact" data-id="id">
         <span className="avatar small">&#9787;</span>
-        <span className="title">{contact.firstName}</span>
+        <a href="/" onClick={this.handleClick}><span className="title">{contact.firstName}</span></a>
       </div>
     );
   }
