@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import contacts from "./contacts";
 const Header = () => <header>&#9993; Contact Book</header>;
 
 class ContactList extends Component {
@@ -7,16 +7,18 @@ class ContactList extends Component {
     return (
       <div id="list">
         <h1>Contacts</h1>
-        <div className="content">{this.props.children}</div>
+        <div className="content">
+          {this.props.children}
+        </div>
       </div>
     );
   }
 }
 
-const ContactCard = () => (
+const ContactCard = ({contact}) => (
   <div className="contact" data-id="id">
     <span className="avatar small">&#9787;</span>
-    <span className="title">Maria Petrova</span>
+    <span className="title">{contact.firstName}</span>
   </div>
 );
 
@@ -50,7 +52,7 @@ const App = () => (
     <Header />
     <div id="book">
       <ContactList>
-        <ContactCard />
+        {contacts.map(contact => <ContactCard key={contact.email} contact={contact}/> )}
       </ContactList>
       <DetailsSection />
     </div>
