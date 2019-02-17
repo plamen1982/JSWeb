@@ -14,6 +14,9 @@ class App extends Component {
             selectedHouseIdx: 0,
             hasFetched: false
         };
+
+        this.streetHoverEvent = this.streetHoverEvent.bind(this);
+        this.houseHoverEvent = this.houseHoverEvent.bind(this);
     }
 
     componentDidMount() {
@@ -66,9 +69,7 @@ class App extends Component {
                                       street={street}
                                       key={idx}
                                       id={idx}
-                                      streetHoverEvent={this.streetHoverEvent.bind(
-                                          this
-                                      )}
+                                      streetHoverEvent={this.streetHoverEvent}
                                   />
                               );
                           })
@@ -85,9 +86,7 @@ class App extends Component {
                                 image={home.imageUrl}
                                 price={home.price}
                                 key={home._id}
-                                houseHoverEvent={this.houseHoverEvent.bind(
-                                    this
-                                )}
+                                houseHoverEvent={this.houseHoverEvent}
                             />
                         );
                     })}
