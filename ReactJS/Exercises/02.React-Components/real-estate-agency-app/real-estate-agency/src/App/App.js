@@ -11,8 +11,24 @@ class App extends Component {
           hasFetched: false
       }
   }
+
+  componentDidMount() {
+      fetch('http://localhost:9999/feed/street/all')
+        .then(data => data.json())
+        .then(data => {
+            this.setState({
+                streets: data.streets,
+                hasFetched: true
+            })
+        })
+  }
+
   render() {
-    return <div className="App">House Agent</div>;
+    return <div className="App">
+                {this.state.streets.map((street, index) => {
+                    return <div className="streets">{index}: street</div>
+                })}
+            </div>;
   }
 }
 
