@@ -3,6 +3,7 @@ import "./App.css";
 
 import Street from "../Street/Street";
 import House from "../House/House";
+import HouseDetails from '../HouseDetails/HouseDetails';
 
 class App extends Component {
     constructor(props) {
@@ -26,6 +27,10 @@ class App extends Component {
             });
     }
 
+    getSelectedHouse() {
+        return this.state.streets[this.state.selectedStreetIdx].homes[this.state.selectedHouseIdx];
+    }   
+
     getSelectedStreet() {
         return this.state.streets[this.state.selectedStreetIdx].homes;
     }   
@@ -38,8 +43,8 @@ class App extends Component {
             <div className="App">
                 <div className="streets">
                 <h2>Streets</h2>
-                    {this.state.streets.length > 0 ? this.state.streets.map((street) => {
-                        return <Street street={street} key={street._id}/>
+                    {this.state.streets.length > 0 ? this.state.streets.map((street, idx) => {
+                        return <Street street={street} key={street._id} id={idx}/>
                     }): null
                 }
                 </div>
@@ -57,6 +62,15 @@ class App extends Component {
                         />
                         );
                     })}
+                    
+                    {this.state.streets.length > 0 ? 
+                        <HouseDetails 
+                            type={this.getSelectedHouse().type}
+                            description={this.getSelectedHouse().description}
+                            price={this.getSelectedHouse().price}
+                            image={this.getSelectedHouse().imageUrl}
+                            key={this.state.selectedHouseIdx}
+                    />: null}
                 </div>
 
             </div>
