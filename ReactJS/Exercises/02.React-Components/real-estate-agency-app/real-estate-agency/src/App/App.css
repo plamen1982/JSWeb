@@ -16,7 +16,8 @@ body {
 }
 
 .streets,
-.houses {
+.houses,
+.house-details {
   width: 350px;
 }
 
