@@ -1,14 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Street.css';
 
-class Street extends Component {
-    render() {
-        return (
-            <div className = "Street">
-                <p className="street-info">{this.props.street.location}</p>
-            </div>
-        );
-    }
-}
+const Street = (props) => (
+    <div className = "Street">
+        <p className="street-info">{props.street.location}</p>
+    </div>
+) 
 
 export default Street;
