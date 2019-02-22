@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 
-const camelCased = (myString) => (
-    myString.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
-);
+const camelCased = (myString) => {
+    debugger;
+    return myString.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+}
+
+
 
 class RegistrationForm extends React.Component {
     state = {
@@ -25,7 +28,7 @@ class RegistrationForm extends React.Component {
     handleFormElementChange = (event) => {
         const { value, id } = event.target;
         const parsedId = camelCased(id);
-
+        debugger;
         this.setState({
             [parsedId]: value
         });
