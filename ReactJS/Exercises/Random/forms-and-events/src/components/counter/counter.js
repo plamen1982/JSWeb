@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 const DisplayCounter = (props) => (
     <div>    
         <div className="column docs-icon-set-column">
-            <i aria-hidden="true" className="clock big icon"></i>
+            <i aria-hidden="true" className="stopwatch big icon"></i>
             <span className="ui label">{props.counter}</span>
         </div>
     </div>
@@ -15,34 +15,49 @@ class Counter extends Component {
         super(props);
 
         this.state = {
-            counter: 0,
+            count: props.initialState,
         }
         this.increment = this.increment.bind(this);
         this.decrement = this.decrement.bind(this);
     }
 
     increment() {
-        this.setState({
-            counter: this.state.counter + 1
-        })
+        this.setState((prevState) => ({
+            count: prevState.count + 1
+        }))
     }
 
     decrement() {
-        let { counter } = this.state;
-        this.setState({
-            counter: this.state.counter - 1
-        })
+        this.setState((prevState) => ({
+            count: prevState.counter - 1
+        }));
     } 
 
+    static getDerivedStateFromProps(props, state) {
+        if(state.count !== state.initialState) {
+            return {
+                count: state.count,
+            }
+        }
+        return {
+            count: props.initialState,
+            initalCounter: props.initalCounter
+        }
+    }
+
     render() {
-        const { counter } = this.state;
+        const { count } = this.state;
         return(
             <div className="ui container">
-                <DisplayCounter counter={counter} />
+                <DisplayCounter counter={count} />
                 <button className="ui button" onClick={this.decrement}>-</button>
                 <button className="ui button" onClick={this.increment}>+</button>
             </div>
         );
+    }
+
+    componentDidMount() {
+        console.log('component Mounted!')
     }
 }
 
