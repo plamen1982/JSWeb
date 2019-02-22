@@ -22,13 +22,14 @@ class RegistrationForm extends Component {
 
     handleRegister(event) {
         event.preventDefault();
-        console.log(event);
+        console.log(this.state);
     
     } 
 
     handleFormElementChange(event) {
         const { target: { value, id } } = event;
         const parsedId = camelCased(id);
+        debugger;
         this.setState({
             [parsedId]: value,
         })
@@ -79,7 +80,7 @@ class RegistrationForm extends Component {
                     <Form.Field>
                         <Input 
                             type="password"
-                            name={firstName}
+                            name={password}
                             id="password"
                             value={password}
                             onChange={this.handleFormElementChange}
