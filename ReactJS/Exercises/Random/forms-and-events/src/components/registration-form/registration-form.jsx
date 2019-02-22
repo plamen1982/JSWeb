@@ -23,6 +23,13 @@ class RegistrationForm extends Component {
     handleRegister(event) {
         event.preventDefault();
         console.log(this.state);
+        this.setState({
+            email: '',
+            firstName: '',
+            lastName: '',
+            password: '',
+            errorMessages: []
+        })
     
     } 
 
