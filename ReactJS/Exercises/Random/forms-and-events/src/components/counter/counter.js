@@ -7,7 +7,14 @@ const DisplayCounter = (props) => (
             <span className="ui label">{props.counter}</span>
         </div>
     </div>
+);
 
+const Decrement = (props) => (
+    <button className="ui button" onClick={props.decrement}>-</button>
+);
+
+const Increment = (props) => (
+    <button className="ui button" onClick={props.increment}>+</button>
 );
 
 class Counter extends Component {
@@ -29,7 +36,7 @@ class Counter extends Component {
 
     decrement() {
         this.setState((prevState) => ({
-            count: prevState.counter - 1
+            count: prevState.count - 1
         }));
     } 
 
@@ -40,7 +47,6 @@ class Counter extends Component {
             }
         }
         return {
-            count: props.initialState,
             initalCounter: props.initalCounter
         }
     }
@@ -50,8 +56,8 @@ class Counter extends Component {
         return(
             <div className="ui container">
                 <DisplayCounter counter={count} />
-                <button className="ui button" onClick={this.decrement}>-</button>
-                <button className="ui button" onClick={this.increment}>+</button>
+                <Decrement decrement={this.decrement}/>
+                <Increment increment={this.increment} />
             </div>
         );
     }
@@ -62,3 +68,8 @@ class Counter extends Component {
 }
 
 export default Counter;
+
+export {
+    Increment,
+    Decrement
+}
