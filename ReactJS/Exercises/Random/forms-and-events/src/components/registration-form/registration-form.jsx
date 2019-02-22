@@ -35,7 +35,18 @@ class RegistrationForm extends Component {
         })
     }
 
+    checkValidity = (event) => {
+        const { target } = event;
 
+        if (!target.checkValidity()) {
+            this.setState(({ errorMessages }) => ({
+                errorMessages: [
+                    ...errorMessages,
+                    target.validationMessage,
+                ]
+            }));
+        }
+    }
 
     render() {
         const { email, firstName, lastName, password, errorMessages } = this.state;
@@ -90,6 +101,16 @@ class RegistrationForm extends Component {
                     </Form.Field>
                     <Button type='submit'>Submit</Button>
                 </Form>
+                {
+                    errorMessages.length
+                    ?
+                        <ul>
+                            {
+                                errorMessages.map(message => <li>{message}</li>)
+                            }
+                        </ul>
+                    : null
+                }
             </div>
         );
     }
