@@ -17,7 +17,7 @@ class App extends Component {
         }
     }
 
-    registerUser(user) {
+    registerUser = (user) => {
         fetch("http://localhost:9999/auth/signUp", {
             method: "POST",
 
@@ -45,14 +45,44 @@ class App extends Component {
         })
     }
 
-    loginUser(user) {
+    loginUser = (user) => {
         // TODO: login a user and set sessionStorage items username and token
     }
 
-    logout(event) {
+    logout = (event) => {
        // TODO: prevent the default state
        // TODO: delete the data from the sessionStorage
        // TODO: update the state (user: null)
+    }
+
+    createGame = (data) => {
+        // TODO: create a game using fetch with a post method then fetch all the games and update the state 
+    }
+
+    switchForm = () => {
+        this.setState((prevState) => ({ loginForm: !prevState.loginForm }));
+    }
+
+    render() {
+        return (
+            <main>
+                <AppHeader
+                    user={this.state.username}
+                    logout={this.logout}
+                    switchForm={this.switchForm}
+                    loginForm={this.state.loginForm}
+                />
+                <AppContent
+                    registerUser={this.registerUser}
+                    loginUser={this.loginUser}
+                    games={this.state.games}
+                    createGame={this.createGame}
+                    user={this.state.user}
+                    loginForm={this.state.loginForm}
+                />
+                <AppFooter/>
+            </main>
+        )
     }
 
     componentDidMount() {
@@ -67,36 +97,6 @@ class App extends Component {
         // TODO: check if there is a logged in user using the sessionStorage (if so, update the state, otherwise set the user to null)
 
        // TODO: fetch all the games
-    }
-
-    createGame(data) {
-        // TODO: create a game using fetch with a post method then fetch all the games and update the state 
-    }
-
-    switchForm = () => {
-        this.setState((prevState) => ({ loginForm: !prevState.loginForm }));
-    }
-
-    render() {
-        return (
-            <main>
-                <AppHeader
-                    user={this.state.username}
-                    logout={this.logout.bind(this)}
-                    switchForm={this.switchForm}
-                    loginForm={this.state.loginForm}
-                />
-                <AppContent
-                    registerUser={this.registerUser.bind(this)}
-                    loginUser={this.loginUser.bind(this)}
-                    games={this.state.games}
-                    createGame={this.createGame.bind(this)}
-                    user={this.state.user}
-                    loginForm={this.state.loginForm}
-                />
-                <AppFooter/>
-            </main>
-        )
     }
 }
 
