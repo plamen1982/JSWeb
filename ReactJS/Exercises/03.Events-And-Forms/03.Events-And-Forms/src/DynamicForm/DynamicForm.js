@@ -9,7 +9,7 @@ class DynamicForm extends React.Component {
         return (
             <div>
                 <div>
-                    {/*TODO: render a form depending on wheather the loginForm property is true*/}
+                   <RegisterForm />
                 </div>
             </div>
         )

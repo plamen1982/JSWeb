@@ -2,20 +2,41 @@ import React from 'react';
 import './register.css';
 
 class RegisterForm extends React.Component {
+    state = {
+        username: '',
+        email: '',
+        password: ''
+    }
+
+    handleSubmit = (eventForm) => {
+        eventForm.preventDefault();
+        const { username, email, password } = eventForm.target;
+        this.setState({ 
+            username,
+            email,
+            password
+         })
+    };
+
+    handleOnChange = (eventInput) => {
+        const { name, value } = eventInput.target;
+        console.log(`name:${name} => value: ${value}`);
+        this.setState({
+            [name]: value
+        });
+    }
 
     render() {
         return (
             <div className="Register">
                 <h1>Sign Up</h1>
-                <form onSubmit={(event) => {
-                    // TODO: prevent the default behavior of the event and use the registerUser function by passing it the data from the form
-                }}>
+                <form onSubmit={this.handleSubmit}>
                     <label>Username</label>
-                    <input type="text" id="usernameReg"/>
+                    <input type="text" id="usernameReg" name="username" onChange={this.handleOnChange}/>
                     <label>Email</label>
-                    <input type="text" id="emailReg"/>
+                    <input type="email" id="emailReg" name="email" onChange={this.handleOnChange}/>
                     <label>Password</label>
-                    <input type="password" id="passwordReg"/>
+                    <input type="password" id="passwordReg" name="password" onChange={this.handleOnChange}/>
                     <input type="submit" value="Sign Up"/>
                 </form>
             </div>
