@@ -10,7 +10,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: null,
+            username: null,
             games: [],
             hasFetched: false,
             loginForm: false,
@@ -33,11 +33,14 @@ class App extends Component {
                     console.log(error)
                 })
             } else {
-                localStorage.setItem('username', data.username);
-                localStorage.setItem('userId', data.userId);
+                const { username, userId } = data;
+
+                localStorage.setItem('username', username);
+                localStorage.setItem('userId', userId);
+
                 this.setState({
-                    user: data.username
-                })
+                    username,
+                });
             }
         })
     }
@@ -52,7 +55,13 @@ class App extends Component {
        // TODO: update the state (user: null)
     }
 
-    componentWillMount() {
+    componentDidMount() {
+        const username = localStorage.getItem('username');
+        if(username) {
+            this.setState({
+                username
+            })
+        }
         // TODO: check if there is a logged in user using the sessionStorage (if so, update the state, otherwise set the user to null)
 
        // TODO: fetch all the games
@@ -70,7 +79,7 @@ class App extends Component {
         return (
             <main>
                 <AppHeader
-                    user={this.state.user}
+                    user={this.state.username}
                     logout={this.logout.bind(this)}
                     switchForm={this.switchForm.bind(this)}
                     loginForm={this.state.loginForm}
