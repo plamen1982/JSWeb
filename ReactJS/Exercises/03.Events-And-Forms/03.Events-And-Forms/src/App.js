@@ -61,6 +61,8 @@ class App extends Component {
             this.setState({
                 username
             })
+        } else {
+            this.setState({ username: null })
         }
         // TODO: check if there is a logged in user using the sessionStorage (if so, update the state, otherwise set the user to null)
 
@@ -71,8 +73,8 @@ class App extends Component {
         // TODO: create a game using fetch with a post method then fetch all the games and update the state 
     }
 
-    switchForm() {
-        // TODO: switch the value of the loginForm property
+    switchForm = () => {
+        this.setState((prevState) => ({ loginForm: !prevState.loginForm }));
     }
 
     render() {
@@ -81,7 +83,7 @@ class App extends Component {
                 <AppHeader
                     user={this.state.username}
                     logout={this.logout.bind(this)}
-                    switchForm={this.switchForm.bind(this)}
+                    switchForm={this.switchForm}
                     loginForm={this.state.loginForm}
                 />
                 <AppContent
