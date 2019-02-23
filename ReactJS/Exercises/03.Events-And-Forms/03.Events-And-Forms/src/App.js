@@ -18,6 +18,7 @@ class App extends Component {
     }
 
     registerUser(user) {
+        console.log(user)
         // TODO: register a user and login
     }
 

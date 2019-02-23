@@ -10,17 +10,26 @@ class RegisterForm extends React.Component {
 
     handleSubmit = (eventForm) => {
         eventForm.preventDefault();
+
         const { username, email, password } = eventForm.target;
+        const { registerUser } = this.props;
+
         this.setState({ 
             username,
             email,
             password
+         });
+
+         registerUser(this.state);
+         this.setState({
+             username: '',
+             email: '',
+             password: ''
          })
     };
 
     handleOnChange = (eventInput) => {
         const { name, value } = eventInput.target;
-        console.log(`name:${name} => value: ${value}`);
         this.setState({
             [name]: value
         });

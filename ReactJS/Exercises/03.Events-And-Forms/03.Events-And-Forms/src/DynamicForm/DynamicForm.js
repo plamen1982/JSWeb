@@ -9,7 +9,7 @@ class DynamicForm extends React.Component {
         return (
             <div>
                 <div>
-                   <RegisterForm />
+                   <RegisterForm registerUser={this.props.registerUser}/>
                 </div>
             </div>
         )
