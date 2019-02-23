@@ -18,7 +18,6 @@ class App extends Component {
     }
 
     registerUser(user) {
-        console.log(user);
         fetch("http://localhost:9999/auth/signUp", {
             method: "POST",
 
@@ -26,6 +25,20 @@ class App extends Component {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(user)
+        })
+        .then((response => response.json()))
+        .then(data => {
+            if(data.errors) {
+                data.errors.forEach((error) => {
+                    console.log(error)
+                })
+            } else {
+                localStorage.setItem('username', data.username);
+                localStorage.setItem('userId', data.userId);
+                this.setState({
+                    user: data.username
+                })
+            }
         })
     }
 
