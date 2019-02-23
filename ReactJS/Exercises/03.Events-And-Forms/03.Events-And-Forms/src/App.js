@@ -18,8 +18,15 @@ class App extends Component {
     }
 
     registerUser(user) {
-        console.log(user)
-        // TODO: register a user and login
+        console.log(user);
+        fetch("http://localhost:9999/auth/signUp", {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user)
+        })
     }
 
     loginUser(user) {
