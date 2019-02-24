@@ -77,6 +77,10 @@ class App extends Component {
     }
 
     logout = (event) => {
+        event.preventDefault();
+        localStorage.removeItem('user');
+        localStorage.removeItem('userId');
+        this.setState({ user: null })
        // TODO: prevent the default state
        // TODO: delete the data from the sessionStorage
        // TODO: update the state (user: null)

@@ -9,7 +9,6 @@ class LogInForm extends React.Component {
 
     handleSubmit = (eventForm) => {
         eventForm.preventDefault();
-        debugger;
 
         const { username, password } = eventForm.target;
         const { loginUser } = this.props;

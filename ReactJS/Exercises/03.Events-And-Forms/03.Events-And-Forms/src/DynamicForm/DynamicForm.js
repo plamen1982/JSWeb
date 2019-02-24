@@ -12,8 +12,7 @@ class DynamicForm extends React.Component {
                     {
                         localStorage.getItem('user') 
                         ? <CreateForm /> 
-                        :
-                        (
+                        :(
                             this.props.loginForm
                             ? <LogInForm loginUser={this.props.loginUser}/>
                             : <RegisterForm registerUser={this.props.registerUser}/>
