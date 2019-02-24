@@ -15,6 +15,8 @@ class App extends Component {
             games: [],
             hasFetched: false,
             loginForm: false,
+            isSnackOpen: false,
+            message: 'Test'
         }
     }
 
@@ -69,6 +71,7 @@ class App extends Component {
 
                 this.setState({
                     user: username,
+                    isSnackOpen: true,
                 });
             }
         })
@@ -93,6 +96,7 @@ class App extends Component {
 
                 this.setState({
                     user: username,
+                    isSnackOpen: true,
                 });
             }
         })
@@ -106,11 +110,8 @@ class App extends Component {
     }
 
     createGame = (data) => {
-
         const { title, description, imageUrl } = data;
-        const objToSend = {
-            title, description, imageUrl
-        }
+        const objToSend = { title, description, imageUrl }
 
         this.postDataByUrlAndObj('/feed/game/create', objToSend)
         .then(data => {
@@ -149,8 +150,9 @@ class App extends Component {
                     createGame={this.createGame}
                     user={this.state.user}
                     loginForm={this.state.loginForm}
+                    isSnackOpen={this.state.isSnackOpen}
                 />
-                <AppFooter/>
+                <AppFooter message={this.state.message} isSnackOpen={this.state.isSnackOpen}/>
             </main>
         )
     }
@@ -164,9 +166,12 @@ class App extends Component {
         } else {
             this.setState({ username: null })
         }
-        // TODO: check if there is a logged in user using the sessionStorage (if so, update the state, otherwise set the user to null)
-
-       // TODO: fetch all the games
+        this.getDataFromServerByUrl('/feed/games')
+        .then(data => {
+            this.setState({
+                games: data.games
+            })
+        })
     }
 }
 
