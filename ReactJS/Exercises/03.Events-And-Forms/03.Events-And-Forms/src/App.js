@@ -4,6 +4,7 @@ import AppHeader from "./App/AppHeader";
 import AppContent from "./App/AppContent";
 import AppFooter from "./App/AppFooter";
 
+const baseUrl = "http://localhost:9999";
 
 class App extends Component {
 
@@ -18,7 +19,7 @@ class App extends Component {
     }
 
     registerUser = (user) => {
-        fetch("http://localhost:9999/auth/signUp", {
+        fetch(`${baseUrl}/auth/signUp`, {
             method: "POST",
 
             headers: {
@@ -46,7 +47,16 @@ class App extends Component {
     }
 
     loginUser = (user) => {
+
+        const { username, password } = user;
         // TODO: login a user and set sessionStorage items username and token
+        fetch(`${baseUrl}/auth/signIn`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password })
+        })
     }
 
     logout = (event) => {
