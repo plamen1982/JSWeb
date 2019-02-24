@@ -11,7 +11,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: null,
+            user: null,
             games: [],
             hasFetched: false,
             loginForm: false,
@@ -40,7 +40,7 @@ class App extends Component {
                 localStorage.setItem('userId', userId);
 
                 this.setState({
-                    username,
+                    user: username,
                 });
             }
         })
@@ -56,6 +56,23 @@ class App extends Component {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({ username, password })
+        })
+        .then((response => response.json()))
+        .then(data => {
+            if(data.errors) {
+                data.errors.forEach((error) => {
+                    console.log(error)
+                })
+            } else {
+                const { username, userId } = data;
+
+                localStorage.setItem('user', username);
+                localStorage.setItem('userId', userId);
+
+                this.setState({
+                    user: username,
+                });
+            }
         })
     }
 
@@ -77,7 +94,7 @@ class App extends Component {
         return (
             <main>
                 <AppHeader
-                    user={this.state.username}
+                    user={this.state.user}
                     logout={this.logout}
                     switchForm={this.switchForm}
                     loginForm={this.state.loginForm}

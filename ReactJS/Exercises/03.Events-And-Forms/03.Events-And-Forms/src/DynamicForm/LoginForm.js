@@ -3,7 +3,7 @@ import './login.css';
 
 class LogInForm extends React.Component {
     state = {
-        email: '',
+        username: '',
         password: '',
     }
 
