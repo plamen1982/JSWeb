@@ -1,19 +1,32 @@
 import React from 'react';
 
+const innerState = {
+    title: '',
+    description: '',
+    imageUrl: ''
+}
+
+const handleOnChange = (event) => {
+    event.preventDefault();
+
+    innerState[event.target.name] = event.target.value;
+}
+
 const CreateForm = (props) => {
 
     return (
         <div className="create-form">
             <h1>Create game</h1>
             <form onSubmit={(event) => {
-                // TODO: prevent the default behaviour of the click event, call the createGame function and pass it the data from the form
+                event.preventDefault();
+                props.createGame(innerState);
             }}>
                 <label>Title</label>
-                <input type="text" id="title"/>
+                <input type="text" id="title" name="title" onChange={handleOnChange}/>
                 <label>Description</label>
-                <textarea type="text" id="description"/>
+                <textarea type="text" id="description" name="description" onChange={handleOnChange}/>
                 <label>ImageUrl</label>
-                <input type="text" id="imageUrl"/>
+                <input type="text" id="imageUrl" name="imageUrl" onChange={handleOnChange}/>
                 <input type="submit" value="Create"/>
             </form>
         </div>

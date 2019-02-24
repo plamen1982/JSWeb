@@ -88,6 +88,23 @@ class App extends Component {
 
     createGame = (data) => {
         // TODO: create a game using fetch with a post method then fetch all the games and update the state 
+        const { title, description, imageUrl } = data;
+        // TODO: login a user and set sessionStorage items username and token
+        fetch(`${baseUrl}/feed/game/create`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ title, description, imageUrl })
+        })
+        .then((response => response.json()))
+        .then(data => {
+            if(data.errors) {
+                data.errors.forEach((error) => {
+                    console.log(error)
+                })
+            }
+        })
     }
 
     switchForm = () => {
