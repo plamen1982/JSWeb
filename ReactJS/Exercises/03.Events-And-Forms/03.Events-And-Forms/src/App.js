@@ -91,7 +91,6 @@ class App extends Component {
                 })
             } else {
                 const { username, userId, message } = data;
-                debugger
                 localStorage.setItem("user", username);
                 localStorage.setItem("userId", userId);
 
