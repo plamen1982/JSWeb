@@ -9,7 +9,7 @@ class DynamicForm extends React.Component {
         return (
             <div>
                 <div>
-                    {
+                    {   
                         localStorage.getItem('user') 
                         ? <CreateForm createGame={this.props.createGame}/> 
                         :(

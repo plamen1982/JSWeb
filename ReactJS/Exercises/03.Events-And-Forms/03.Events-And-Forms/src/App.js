@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
 import AppHeader from "./App/AppHeader";
 import AppContent from "./App/AppContent";
 import AppFooter from "./App/AppFooter";
@@ -7,7 +7,6 @@ import AppFooter from "./App/AppFooter";
 const baseUrl = "http://localhost:9999";
 
 class App extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -16,8 +15,8 @@ class App extends Component {
             hasFetched: false,
             loginForm: false,
             isSnackOpen: false,
-            message: 'Test'
-        }
+            message: "",
+        };
     }
 
     /**
@@ -31,14 +30,13 @@ class App extends Component {
 
     postDataByUrlAndObj = (url, objToSend) => {
         return fetch(`${baseUrl}${url}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(objToSend)
-            })
-                .then(response => response.json())
-    }
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(objToSend)
+        }).then(response => response.json());
+    };
 
     /**
      * @name getDataFromServerByUrl
@@ -48,97 +46,108 @@ class App extends Component {
      * @returns {Promise}
      */
 
-    getDataFromServerByUrl = (url) => {
-        return fetch(`${baseUrl}${url}`)
-                .then(response => response.json())
-    }
+    getDataFromServerByUrl = url => {
+        return fetch(`${baseUrl}${url}`).then(response => response.json());
+    };
 
-    registerUser = (user) => {
+    registerUser = user => {
         const { email, password, username } = user;
         const objToSend = { username, password, email };
 
-        this.postDataByUrlAndObj('/auth/signUp', objToSend)
-        .then(data => {
-            if(data.errors) {
-                data.errors.forEach((error) => {
-                    console.log(error)
-                })
+        this.postDataByUrlAndObj("/auth/signUp", objToSend).then(data => {
+            if (data.errors) {
+                data.errors.forEach(error => {
+                   this.setState({
+                       message: error.msg,
+                       isSnackOpen: true
+                   })
+                });
             } else {
-                const { username, userId } = data;
+                const { username, userId, message } = data;
 
-                localStorage.setItem('username', username);
-                localStorage.setItem('userId', userId);
+                localStorage.setItem("username", username);
+                localStorage.setItem("userId", userId);
 
                 this.setState({
                     user: username,
                     isSnackOpen: true,
+                    message,
+                    variant: 'success'
                 });
             }
-        })
-    }
+        });
+    };
 
-    loginUser = (user) => {
-
+    loginUser = user => {
         const { username, password } = user;
-        const objToSend = { username, password }
+        const objToSend = { username, password };
 
-        this.postDataByUrlAndObj('/auth/signIn', objToSend)
-        .then(data => {
-            if(data.errors) {
-                data.errors.forEach((error) => {
-                    console.log(error)
+        this.postDataByUrlAndObj("/auth/signIn", objToSend).then(data => {
+            const { username, message, userId, errors } = data;
+
+            if (!username || !userId) {
+                this.setState({
+                    message
                 })
             } else {
-                const { username, userId } = data;
-
-                localStorage.setItem('user', username);
-                localStorage.setItem('userId', userId);
+                const { username, userId, message } = data;
+                debugger
+                localStorage.setItem("user", username);
+                localStorage.setItem("userId", userId);
 
                 this.setState({
                     user: username,
                     isSnackOpen: true,
+                    message,
+                    variant: "success"
                 });
             }
-        })
-    }
+        });
+    };
 
-    logout = (event) => {
+    logout = event => {
         event.preventDefault();
-        localStorage.removeItem('user');
-        localStorage.removeItem('userId');
-        this.setState({ user: null })
-    }
+        localStorage.removeItem("user");
+        localStorage.removeItem("userId");
+        this.setState({
+            user: null,
+            message: "Logout successfully",
+            isSnackOpen: true,
+        });
+    };
 
-    createGame = (data) => {
+    createGame = data => {
         const { title, description, imageUrl } = data;
-        const objToSend = { title, description, imageUrl }
+        const objToSend = { title, description, imageUrl };
 
-        this.postDataByUrlAndObj('/feed/game/create', objToSend)
-        .then(data => {
-            if(data.errors) {
-                data.errors.forEach((error) => {
-                    console.log(error)
-                })
+        this.postDataByUrlAndObj("/feed/game/create", objToSend).then(data => {
+            const { errors } = data;
+            if (errors) {
+                errors.forEach(error => {
+                    console.log(error);
+                });
             } else {
-               this.getDataFromServerByUrl('/feed/games')
-                .then(data => {
+                this.getDataFromServerByUrl("/feed/games").then(data => {
+                    const { message, games } = data;
                     this.setState({
-                        games: data.games
-                    })
-                })
+                        games,
+                        message,
+                        isSnackOpen: true,
+                    });
+                });
             }
-        })
-    }
+        });
+    };
 
     switchForm = () => {
-        this.setState((prevState) => ({ loginForm: !prevState.loginForm }));
-    }
+        this.setState(prevState => ({ loginForm: !prevState.loginForm }));
+    };
 
     render() {
         return (
             <main>
                 <AppHeader
-                    user={this.state.user || localStorage.getItem('user')}
+                    user={this.state.user || localStorage.getItem("user")}
                     logout={this.logout}
                     switchForm={this.switchForm}
                     loginForm={this.state.loginForm}
@@ -152,29 +161,30 @@ class App extends Component {
                     loginForm={this.state.loginForm}
                     isSnackOpen={this.state.isSnackOpen}
                 />
-                <AppFooter message={this.state.message} isSnackOpen={this.state.isSnackOpen}/>
+                <AppFooter
+                    message={this.state.message}
+                    isSnackOpen={this.state.isSnackOpen}
+                />
             </main>
-        )
+        );
     }
 
     componentDidMount() {
-        const username = localStorage.getItem('username');
-        if(username) {
+        const username = localStorage.getItem("username");
+        if (username) {
             this.setState({
                 username
-            })
+            });
         } else {
-            this.setState({ username: null })
+            this.setState({ username: null });
         }
-        this.getDataFromServerByUrl('/feed/games')
-        .then(data => {
+        this.getDataFromServerByUrl("/feed/games").then(data => {
+            const { games } = data;
             this.setState({
-                games: data.games
-            })
-        })
+                games: games
+            });
+        });
     }
 }
 
 export default App;
-
-
