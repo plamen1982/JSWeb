@@ -18,16 +18,44 @@ class App extends Component {
         }
     }
 
-    registerUser = (user) => {
-        fetch(`${baseUrl}/auth/signUp`, {
-            method: "POST",
+    /**
+     * @name postDataByUrlAndObj
+     * @description post data by given url, exmaple:  connecting url with baseUrl = 'http://localhost:9999 with url = /feed/create/game and use body => objToSend = { title: 'some title' }
+     * @type {method}
+     * @param {String} url
+     * @param {Object} objToSend
+     * @returns {Promise}
+     */
 
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(user)
-        })
-        .then((response => response.json()))
+    postDataByUrlAndObj = (url, objToSend) => {
+        return fetch(`${baseUrl}${url}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(objToSend)
+            })
+                .then(response => response.json())
+    }
+
+    /**
+     * @name getDataFromServerByUrl
+     * @description fetch data by given url, exmaple: connecting url with baseUrl = 'http://localhost:9999 with url = /feed/games => http://localhost:9999/feed/games
+     * @type {method}
+     * @param {String} url
+     * @returns {Promise}
+     */
+
+    getDataFromServerByUrl = (url) => {
+        return fetch(`${baseUrl}${url}`)
+                .then(response => response.json())
+    }
+
+    registerUser = (user) => {
+        const { email, password, username } = user;
+        const objToSend = { username, password, email };
+
+        this.postDataByUrlAndObj('/auth/signUp', objToSend)
         .then(data => {
             if(data.errors) {
                 data.errors.forEach((error) => {
@@ -49,15 +77,9 @@ class App extends Component {
     loginUser = (user) => {
 
         const { username, password } = user;
-        // TODO: login a user and set sessionStorage items username and token
-        fetch(`${baseUrl}/auth/signIn`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username, password })
-        })
-        .then((response => response.json()))
+        const objToSend = { username, password }
+
+        this.postDataByUrlAndObj('/auth/signIn', objToSend)
         .then(data => {
             if(data.errors) {
                 data.errors.forEach((error) => {
@@ -81,27 +103,27 @@ class App extends Component {
         localStorage.removeItem('user');
         localStorage.removeItem('userId');
         this.setState({ user: null })
-       // TODO: prevent the default state
-       // TODO: delete the data from the sessionStorage
-       // TODO: update the state (user: null)
     }
 
     createGame = (data) => {
-        // TODO: create a game using fetch with a post method then fetch all the games and update the state 
+
         const { title, description, imageUrl } = data;
-        // TODO: login a user and set sessionStorage items username and token
-        fetch(`${baseUrl}/feed/game/create`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ title, description, imageUrl })
-        })
-        .then((response => response.json()))
+        const objToSend = {
+            title, description, imageUrl
+        }
+
+        this.postDataByUrlAndObj('/feed/game/create', objToSend)
         .then(data => {
             if(data.errors) {
                 data.errors.forEach((error) => {
                     console.log(error)
+                })
+            } else {
+               this.getDataFromServerByUrl('/feed/games')
+                .then(data => {
+                    this.setState({
+                        games: data.games
+                    })
                 })
             }
         })
@@ -115,7 +137,7 @@ class App extends Component {
         return (
             <main>
                 <AppHeader
-                    user={this.state.user}
+                    user={this.state.user || localStorage.getItem('user')}
                     logout={this.logout}
                     switchForm={this.switchForm}
                     loginForm={this.state.loginForm}
