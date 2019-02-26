@@ -19,14 +19,14 @@ const NavBar = () => (
         </ul>
     </nav>
 );
-// const Bananas = () => (<h1>Bananas</h1>);
+const Bananas = () => (<h1>Bananas</h1>);
 
-// const Grocery = () => (
-//     <div>
-//         <div>Groceries</div>
-//         <Route path="/bananas" component={Bananas} exact/>
-//     </div>
-// );
+const Grocery = () => (
+    <div>
+        <div>Groceries</div>
+        <Route path="/grocery/bananas" component={Bananas} exact />
+    </div>
+);
 
 const AppWrapper = () => {
     return (
@@ -36,7 +36,7 @@ const AppWrapper = () => {
                     <NavBar />
                     <Switch>
                         <Route path="/" render={() => <HomeComponent home="Home from props"/> } exact />
-                        {/* <Route path="/groceries" component={Groceries} exact/> */}
+                        <Route path="/grocery" component={Grocery} />
                         <Route path="/about" component={AboutComponent} exact />
                         <Route path="/contact" component={ContactComponent} exact />
                     </Switch>
