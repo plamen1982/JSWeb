@@ -28,10 +28,10 @@ const Grocery = () => (
     </div>
 );
 
-const GroceryWrapper = () => (
+const GroceryWrapper = ({ match: { path } }) => (
     <div>
-        <Route path="/grocery" component={Grocery} exact/>
-        <Route path="/grocery/bananas" component={Bananas} exact/>
+        <Route path={`${path}/`} component={Grocery} exact/>
+        <Route path={`${path}/bananas`} component={Bananas} exact/>
     </div>
 );
 
@@ -43,9 +43,9 @@ const AppWrapper = () => {
                     <NavBar />
                     <Switch>
                         <Route path="/" render={() => <HomeComponent home="Home from props"/> } exact />
-                        <Route path="/grocery" component={GroceryWrapper} />
                         <Route path="/about" component={AboutComponent} exact />
                         <Route path="/contact" component={ContactComponent} exact />
+                        <Route path="/grocery" component={GroceryWrapper} match={"/grocery"}/>
                     </Switch>
                     <footer>Footer</footer>
                 </Fragment>
