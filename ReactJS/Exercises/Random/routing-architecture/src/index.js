@@ -15,12 +15,18 @@ const NavBar = () => (
                 <Link to="/">Home</Link>
                 <Link to="/about">About</Link>
                 <Link to="/contact">Contact</Link>
+                <Link to="/grocery">Grocery</Link>
             </li>
         </ul>
     </nav>
 );
 const Bananas = () => (<h1>Bananas</h1>);
-const Grocery = () => (<h1>Grocery</h1>);
+const Grocery = () => (
+    <div>
+        <h1>Grocery</h1>
+        <Link to="/grocery/bananas" >Bananas</Link>
+    </div>
+);
 
 const GroceryWrapper = () => (
     <div>
