@@ -9,6 +9,15 @@ import "./App.css";
 import { Route, Switch } from "react-router-dom";
 
 class App extends Component {
+
+    handleChange = () => {
+
+    }
+
+    handleSubmit = () => {
+
+    }
+
     render() {
         return (
             <div className="App">
@@ -16,9 +25,9 @@ class App extends Component {
                 <Header />
                 <Switch>
                     <Route path="/" component={Home} exact/>
+                    <Route path="/register" render={() => <Register handleSubmit={this.handleSubmit} /> } exact/>
                     <Route path="/login" component={Login} exact/>
                     <Route path="/create" component={Create} exact/>
-                    <Route path="/register" component={Register} exact/>
                 </Switch>
             </div>
         );
