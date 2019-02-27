@@ -6,6 +6,7 @@ class Login extends Component {
     return (
       <div className="Login">
           { /* TODO */ }
+          Login
       </div>
     );
   }

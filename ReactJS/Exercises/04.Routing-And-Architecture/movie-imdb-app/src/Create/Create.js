@@ -6,6 +6,7 @@ class Create extends Component {
     return (
       <div className="Create">
          {/* TODO */}
+         Create
       </div>
     );
   }

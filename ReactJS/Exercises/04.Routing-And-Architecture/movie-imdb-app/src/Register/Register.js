@@ -6,6 +6,7 @@ class Register extends Component {
     return (
       <div className="Register">
           { /* TODO */ }
+          Register
       </div>
     );
   }
