@@ -3,6 +3,8 @@ import Home from "./Home/Home";
 import Register from "./Register/Register";
 import Login from "./Login/Login";
 import Create from "./Create/Create";
+import Header from "./Header/Header";
+
 import "./App.css";
 import { Route, Link, Switch } from "react-router-dom";
 
@@ -11,11 +13,12 @@ class App extends Component {
         return (
             <div className="App">
                 {/* TODO */}
+                <Header />
                 <Switch>
-                    <Route path="/" component={Home} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/create" component={Create} />
-                    <Route path="/register" component={Register} />
+                    <Route path="/" component={Home} exact/>
+                    <Route path="/login" component={Login} exact/>
+                    <Route path="/create" component={Create} exact/>
+                    <Route path="/register" component={Register} exact/>
                 </Switch>
             </div>
         );
