@@ -6,7 +6,7 @@ import Create from "./Create/Create";
 import Header from "./Header/Header";
 
 import "./App.css";
-import { Route, Link, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 class App extends Component {
     render() {
