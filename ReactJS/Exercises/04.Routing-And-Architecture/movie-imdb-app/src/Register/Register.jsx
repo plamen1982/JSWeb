@@ -2,21 +2,48 @@ import React, { Component } from "react";
 import "./Register.css";
 
 class Register extends Component {
+    state = {
+        username: null,
+        email: null,
+        password: null,
+    }
 
+    handleChange = (e) => {
+        const { value, name } = e.target;
+        this.setState({
+            [name]: value
+        });
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const { username, email, password } = this.state;
+        const user = {
+            username,
+            password,
+            email
+        }
+        fetch("http://localhost:9999/auth/signup", {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user)
+        });
+    }
     render() {
-        const { handleSubmit, handleChange } = this.props;
         return (
             <div className="Register">
                 <h1>Register</h1>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={this.handleSubmit}>
                     <label htmlFor="username">Username</label>
                     <input
                         type="text"
                         id="username"
                         placeholder="Ivan Ivanov"
                         name="username"
-                        value={this.value}
-                        onChange={handleChange}
+                        onChange={this.handleChange}
                     />
                     <label htmlFor="email">Email</label>
                     <input
@@ -24,8 +51,7 @@ class Register extends Component {
                         id="email"
                         placeholder="ivan@gmail.com"
                         name="email"
-                        value={this.value}
-                        onChange={handleChange}
+                        onChange={this.handleChange}
                     />
                     <label htmlFor="password">Password</label>
                     <input 
@@ -33,8 +59,7 @@ class Register extends Component {
                         id="password" 
                         placeholder="******" 
                         name="password"
-                        value={this.value}
-                        onChange={handleChange}
+                        onChange={this.handleChange}
                     />
                     <input type="submit" value="REGISTER" />
                 </form>

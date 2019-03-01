@@ -10,36 +10,7 @@ import { Route, Switch } from "react-router-dom";
 
 class App extends Component {
 
-    state = {
-        username: null,
-        email:null,
-        password: null,
-    }
 
-    handleChange = (e) => {
-        const { value, name } = e.target;
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleSubmit = (e) => {
-        e.preventDefault();
-        const { username, email, password } = this.state;
-        const user = {
-            username,
-            password,
-            email
-        }
-        fetch("http://localhost:9999/auth/signup", {
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(user)
-        });
-    }
 
     render() {
         return (
@@ -49,10 +20,7 @@ class App extends Component {
                 <Switch>
                     <Route path="/" component={Home} exact/>
                     <Route exact path="/register" render={
-                        () => <Register 
-                                    handleSubmit={this.handleSubmit} 
-                                    handleChange={this.handleChange}
-                        /> } 
+                        () => <Register /> } 
                     />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/create" component={Create} />
