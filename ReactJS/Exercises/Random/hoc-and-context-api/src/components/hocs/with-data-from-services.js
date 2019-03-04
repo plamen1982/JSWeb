@@ -1,10 +1,9 @@
 import React from 'react';
 
 const withDataFromService = (ComponentToBeExtends, initialData, serviceMethod) => {
-    return class extends ComponentToBeExtends {
+    return class extends React.Component {
         constructor(props) {
             super(props)
-
             this.state = {
                 data: initialData,
                 error: null,

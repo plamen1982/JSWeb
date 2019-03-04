@@ -2,10 +2,10 @@ import React from "react";
 import BooksService from "../services/books-service";
 import withDataFromService from "./hocs/with-data-from-services";
 
-const BookList = () => {
-    const { books, error } = this.props;
+const BookList = (props) => {
+    const { data, error } = props;
 
-    if (!books.length) {
+    if (!data.length) {
         return null;
     }
 
@@ -16,7 +16,7 @@ const BookList = () => {
     return (
         <ul>
             {
-                books.map(book => (
+                data.map(book => (
                 <li key={book.id}>Title: {book.title}</li>
             ))
             }
