@@ -24,6 +24,4 @@ const BookList = () => {
     );
 };
 
-const BookListHoc = withDataFromService(BookList, [], new BooksService().getBooks);
-
-export default BookList;
+export default withDataFromService(BookList, [], new BooksService().getBooks);
