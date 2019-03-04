@@ -37,20 +37,18 @@ const GroceryWrapper = ({ match: { path } }) => (
 
 const AppWrapper = () => {
     return (
-
-            <Router>
-                <Fragment>
-                    <NavBar />
-                    <Switch>
-                        <Route path="/" render={() => <HomeComponent home="Home from props"/> } exact />
-                        <Route path="/about" component={AboutComponent} exact />
-                        <Route path="/contact" component={ContactComponent} exact />
-                        <Route path="/grocery" component={GroceryWrapper} match={"/grocery"}/>
-                    </Switch>
-                    <footer>Footer</footer>
-                </Fragment>
-            </Router>
-
+        <Router>
+            <Fragment>
+                <NavBar />
+                <Switch>
+                    <Route path="/" render={() => <HomeComponent home="Home from props"/> } exact />
+                    <Route path="/about" component={AboutComponent} exact />
+                    <Route path="/contact" component={ContactComponent} exact />
+                    <Route path="/grocery" component={GroceryWrapper} match={"/grocery"}/>
+                </Switch>
+                <footer>Footer</footer>
+            </Fragment>
+        </Router>
     );
 };
 ReactDOM.render(<AppWrapper />, document.getElementById("root"));
