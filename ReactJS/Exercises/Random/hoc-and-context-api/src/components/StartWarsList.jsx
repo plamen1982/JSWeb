@@ -16,9 +16,7 @@ const StarWarsList = (props) => {
     return(
         <ul>
             {
-                data.map(charackter => (
-                    <li key={charackter.url}>Name: {charackter.name}</li>
-                ))
+                data.map(charackter => <li key={charackter.url}>Name: {charackter.name}</li> )
             }
         </ul>
     );

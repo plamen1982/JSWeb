@@ -6,8 +6,8 @@ import StartWarsList from './components/StartWarsList';
 
 ReactDOM.render(
     <Fragment>
-    <StartWarsList />
         <BookList />
+        <StartWarsList />
     </Fragment>
     , document.getElementById('root')
     );
