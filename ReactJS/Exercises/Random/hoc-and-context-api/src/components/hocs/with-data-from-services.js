@@ -1,7 +1,7 @@
-import React, { Component }  from 'react';
+import React from 'react';
 
-const withDataFromService = (initialData, serviceMethod) => {
-    return class extends Component {
+const withDataFromService = (ComponentToBeExtends, initialData, serviceMethod) => {
+    return class extends ComponentToBeExtends {
         constructor(props) {
             super(props)
 
@@ -31,7 +31,7 @@ const withDataFromService = (initialData, serviceMethod) => {
                 return <span>Something went wrong !</span>
             }
 
-            return <Component data={data} {...this.props} />
+            return <ComponentToBeExtends data={data} {...this.props} />
         }
     } 
 }
