@@ -6,7 +6,7 @@ import StartWarsList from './components/StartWarsList';
 
 ReactDOM.render(
     <Fragment>
-        <BookList />
+        <BookList theme='dark'/>
         <StartWarsList />
     </Fragment>
     , document.getElementById('root')

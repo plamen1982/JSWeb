@@ -12,6 +12,7 @@ class DataFromServiceProvider extends React.Component {
 
     componentDidMount() {
         const { serviceMethod } = this.props;
+        
         try {
             this.setState({ isLoading: true }, async() => {
                 const data = await serviceMethod();

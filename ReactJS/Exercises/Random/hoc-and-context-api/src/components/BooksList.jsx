@@ -34,7 +34,7 @@ import BooksService from "../services/books-service";
 import DataFromServiceProvider from "./render-with-data-from-service";
 
 const BookList = (props) => {
-    const { data, error } = props;
+    const { data, error, theme } = props;
 
     if (!data.length) {
         return null;
@@ -45,7 +45,7 @@ const BookList = (props) => {
     }
 
     return (
-        <ul>
+        <ul className={theme}>
             {
                 data.map(book => (
                 <li key={book.id}>Title: {book.title}</li>
@@ -55,12 +55,11 @@ const BookList = (props) => {
     );
 };
 
-const BookListWithServiceDataProvider = () => (
+const BookListWithServiceDataProvider = ({ theme }) => (
     <DataFromServiceProvider 
         initialData={[]}
         serviceMethod={new BooksService().getBooks}
-        render={(data) => <BookList data={data} 
-    />
+        render={(data) => <BookList data={data} theme={theme}/>
     }
 />);
 
