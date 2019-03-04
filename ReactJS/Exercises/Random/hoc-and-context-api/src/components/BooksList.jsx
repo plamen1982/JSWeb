@@ -2,8 +2,6 @@ import React from "react";
 import BooksService from "../services/books-service";
 import withDataFromService from "./hocs/with-data-from-services";
 
-const service = new BooksService();
-
 const BookList = () => {
     const { books, error } = this.props;
 
@@ -26,6 +24,6 @@ const BookList = () => {
     );
 };
 
-const BookListHoc = withDataFromService(BookList, [], service.getBooks);
+const BookListHoc = withDataFromService(BookList, [], new BooksService().getBooks);
 
 export default BookList;
