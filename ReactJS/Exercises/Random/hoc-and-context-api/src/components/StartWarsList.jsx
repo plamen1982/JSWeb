@@ -1,51 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 import StartWarsService from '../services/star-wars-service';
+import withDataFromService from "./hocs/with-data-from-services";
 
-class BookList extends Component {
-    constructor(props) {
-        super(props);
+const StarWarsList = (props) => {
+    const { data, error } = props;
 
-        //creating new instanse from the class charactersService();
-        this.service = new StartWarsService();
-
-        this.state = {
-            characters: [],
-            error: '',
-        }
-    }
-    //add all side effects inside componentDidMount, side effect is functionality
-    // that is not releted to rendering, more offen is connected with fetching data, making some animations
-    async componentDidMount() {
-        try {
-            const characters = await this.service.getStarWarsCharacters();
-
-            this.setState({ characters });
-        } catch(error) {
-            this.setState({ error });
-        }
+    if(!data.length) {
+        return null;
     }
 
-    render() {
-        const { characters, error } = this.state;
-
-        if(!characters.length) {
-            return null;
-        }
-
-        if(error) {
-            return <span>Something went wrong!</span>;
-        }
-
-        return(
-            <ul>
-                {
-                    characters.map(charackter => (
-                        <li key={charackter.url}>Name: {charackter.name}</li>
-                    ))
-                }
-            </ul>
-        );
+    if(error) {
+        return <span>Something went wrong!</span>;
     }
+
+    return(
+        <ul>
+            {
+                data.map(charackter => (
+                    <li key={charackter.url}>Name: {charackter.name}</li>
+                ))
+            }
+        </ul>
+    );
 }
 
-export default BookList;
+export default withDataFromService(StarWarsList, [], new StartWarsService().getStarWarsCharacters);

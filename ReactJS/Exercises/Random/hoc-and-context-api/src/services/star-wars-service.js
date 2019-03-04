@@ -4,7 +4,7 @@ class StarWarsService {
         this.charactersUrl = `${this.baseUrl}/people`;
     }
 
-    getStarWarsCharacters(page = 1) {
+    getStarWarsCharacters = (page = 1) => {
         return fetch(`${this.charactersUrl}?page=${page}`)
             .then(response => response.json())
             .then(data => data.results);
