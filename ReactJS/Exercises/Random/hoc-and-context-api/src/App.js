@@ -1,5 +1,8 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import "./App.css";
+
+const defaultTheme = "light";
+const { Provider, Consumer } = React.createContext(defaultTheme);
 
 const Nav = ({ items = [], theme }) => (
     <nav className={theme}>
@@ -24,29 +27,30 @@ const PhoneBook = ({ contacts = [], theme }) => (
 
 class App extends Component {
     constructor(props) {
-      super(props);
+        super(props);
 
-      this.state = {
-        contacts: [
-          {id: 'pesho', name: 'Pesho', tel: "0889999111"},
-          {id: 'gosho', name: 'Gosho', tel: "0889999112"},
-          {id: 'rosho', name: 'Gosho', tel: "0889999113"},
-        ],
-        items: [
-          {id: 'home', name: 'Home'},
-          {id: 'about', name: 'About'},
-          {id: 'contact', name: 'Contact'},
-        ]
-      }
+        this.state = {
+            contacts: [
+                { id: "pesho", name: "Pesho", tel: "0889999111" },
+                { id: "gosho", name: "Gosho", tel: "0889999112" },
+                { id: "rosho", name: "Gosho", tel: "0889999113" }
+            ],
+            items: [
+                { id: "home", name: "Home" },
+                { id: "about", name: "About" },
+                { id: "contact", name: "Contact" }
+            ],
+            theme: "dark"
+        };
     }
     render() {
-        const { items, contacts } = this.state;
+        const { items, contacts, theme } = this.state;
 
         return (
-            <Fragment>
+            <Provider value={theme}>
                 <Nav items={items} />
                 <PhoneBook contacts={contacts} />
-            </Fragment>
+            </Provider>
         );
     }
 }
