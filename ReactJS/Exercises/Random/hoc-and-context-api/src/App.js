@@ -27,7 +27,11 @@ class App extends Component {
       super(props);
 
       this.state = {
-        contacts: [],
+        contacts: [
+          {id: 'pesho', name: 'Pesho', tel: "0889999111"},
+          {id: 'gosho', name: 'Gosho', tel: "0889999112"},
+          {id: 'rosho', name: 'Gosho', tel: "0889999113"},
+        ],
         items: [
           {id: 'home', name: 'Home'},
           {id: 'about', name: 'About'},
@@ -36,11 +40,12 @@ class App extends Component {
       }
     }
     render() {
-        const { items } = this.state;
+        const { items, contacts } = this.state;
+
         return (
             <Fragment>
-                <PhoneBook />
                 <Nav items={items} />
+                <PhoneBook contacts={contacts} />
             </Fragment>
         );
     }
