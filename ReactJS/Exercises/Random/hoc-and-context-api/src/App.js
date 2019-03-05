@@ -6,22 +6,42 @@ const { Provider, Consumer } = React.createContext(defaultTheme);
 
 const Nav = ({ items = [], theme }) => (
     <nav className={theme}>
-        {items.map(item => (
+        {
+          items.map(item => (
             <a href="/" key={item.id}>
                 {item.name}
             </a>
-        ))}
+        ))
+      }
     </nav>
+);
+
+const NavConsumer = ({ items }) => (
+  <Consumer>
+    {
+      (theme) => <Nav theme={theme} items={items}/>
+    }
+  </Consumer>
+);
+
+const PhoneBookConsumer = ({ contacts }) => (
+  <Consumer>
+    {
+      (theme) => <PhoneBook theme={theme} contacts={contacts} />
+    }
+  </Consumer>
 );
 
 const PhoneBook = ({ contacts = [], theme }) => (
     <div className={theme}>
-        {contacts.map(contact => (
+        {
+          contacts.map(contact => (
             <div key={contact.id}>
                 <h4>Name: {contact.name}</h4>
                 <h4>Telephone: {contact.tel}</h4>
             </div>
-        ))}
+        ))
+      }
     </div>
 );
 
@@ -48,8 +68,8 @@ class App extends Component {
 
         return (
             <Provider value={theme}>
-                <Nav items={items} />
-                <PhoneBook contacts={contacts} />
+                <NavConsumer items={items} />
+                <PhoneBookConsumer contacts={contacts} />
             </Provider>
         );
     }
