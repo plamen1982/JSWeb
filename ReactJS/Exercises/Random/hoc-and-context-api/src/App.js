@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 
 const defaultTheme = "light";
-const { Provider, Consumer } = React.createContext(defaultTheme);
+const { Provider: ThemeProvider, Consumer: ThemeConsumer } = React.createContext(defaultTheme);
 
 const Nav = ({ items = [], theme }) => (
     <nav className={theme}>
@@ -17,19 +17,19 @@ const Nav = ({ items = [], theme }) => (
 );
 
 const NavConsumer = ({ items }) => (
-  <Consumer>
+  <ThemeConsumer>
     {
       (theme) => <Nav theme={theme} items={items}/>
     }
-  </Consumer>
+  </ThemeConsumer>
 );
 
 const PhoneBookConsumer = ({ contacts }) => (
-  <Consumer>
+  <ThemeConsumer>
     {
       (theme) => <PhoneBook theme={theme} contacts={contacts} />
     }
-  </Consumer>
+  </ThemeConsumer>
 );
 
 const PhoneBook = ({ contacts = [], theme }) => (
@@ -63,14 +63,15 @@ class App extends Component {
             theme: "dark"
         };
     }
+
     render() {
         const { items, contacts, theme } = this.state;
 
         return (
-            <Provider value={theme}>
+            <ThemeProvider value={theme}>
                 <NavConsumer items={items} />
                 <PhoneBookConsumer contacts={contacts} />
-            </Provider>
+            </ThemeProvider>
         );
     }
 }
