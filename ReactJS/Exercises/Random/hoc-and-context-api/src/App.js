@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import "./App.css";
 
-const defaultTheme = "light";
+const defaultTheme = {
+  // color: 'light',
+  // changeTheme() {}
+}
 const { Provider: ThemeProvider, Consumer: ThemeConsumer } = React.createContext(defaultTheme);
 
 const Nav = ({ items = [], theme }) => (
@@ -27,13 +30,13 @@ const NavConsumer = ({ items }) => (
 const PhoneBookConsumer = ({ contacts }) => (
   <ThemeConsumer>
     {
-      (theme) => <PhoneBook theme={theme} contacts={contacts} />
+      ({ theme, changeTheme }) => <PhoneBook theme={theme} contacts={contacts} changeTheme={changeTheme}/>
     }
   </ThemeConsumer>
 );
 
-const PhoneBook = ({ contacts = [], theme }) => (
-    <div className={theme} style={{ backgroundColor: theme === 'dark' ? 'skyblue': 'lightblue' }}>
+const PhoneBook = ({ contacts = [], theme, changeTheme }) => (
+    <div className={theme} style={{ backgroundColor: theme.color === 'dark' ? 'darkblue': 'skyblue', color: 'white' }}>
         {
           contacts.map(contact => (
             <div key={contact.id}>
@@ -42,8 +45,10 @@ const PhoneBook = ({ contacts = [], theme }) => (
             </div>
         ))
       }
+      <button onClick={changeTheme}>Change Theme</button>
     </div>
 );
+
 
 class App extends Component {
     constructor(props) {
@@ -60,7 +65,9 @@ class App extends Component {
                 { id: "about", name: "About" },
                 { id: "contact", name: "Contact" }
             ],
-            theme: "light"
+            theme: {
+              color: 'light'
+            }
         };
     }
 
@@ -74,13 +81,21 @@ class App extends Component {
       }
     }
 
+    handleThemeChange = () => {
+      this.setState({
+        theme: {
+          color: 'dark'
+        }
+      })
+    }
+
     render() {
         const { items, contacts, theme } = this.state;
 
         return (
-            <ThemeProvider value={theme}>
+            <ThemeProvider value={{ theme, changeTheme: this.handleThemeChange }}>
                 <NavConsumer items={items} />
-                <PhoneBookConsumer contacts={contacts} />
+                <PhoneBookConsumer contacts={contacts}  />
             </ThemeProvider>
         );
     }
