@@ -33,7 +33,7 @@ const PhoneBookConsumer = ({ contacts }) => (
 );
 
 const PhoneBook = ({ contacts = [], theme }) => (
-    <div className={theme}>
+    <div className={theme} style={{ backgroundColor: theme === 'dark' ? 'skyblue': 'lightblue' }}>
         {
           contacts.map(contact => (
             <div key={contact.id}>
@@ -60,8 +60,18 @@ class App extends Component {
                 { id: "about", name: "About" },
                 { id: "contact", name: "Contact" }
             ],
-            theme: "dark"
+            theme: "light"
         };
+    }
+
+    componentDidMount() {
+      const hours = new Date().getHours();
+
+      if(hours > 18) {
+        setTimeout(() => {
+          this.setState({ theme: "dark" })
+        }, 2000)
+      }
     }
 
     render() {
