@@ -5,14 +5,16 @@ const { Provider, Consumer } = React.createContext();
 class AppProvider extends Component {
   state = {
     number: 10,
-    inc: () => {
-      this.setState({ number: this.state.number + 1 });
-    }
   }
 
   render() {
     return (
-      <Provider value={this.state} >
+      <Provider value={{
+        state: this.state,
+        inc: () => {
+          this.setState({ number: this.state.number + 1 });
+        }
+        }} >
         {this.props.children}
       </Provider>
     );
@@ -22,7 +24,7 @@ class AppProvider extends Component {
 const MrGreen = () => (
   <Consumer>
     {
-      ({ number }) => (<div className="green">{number}</div>)
+      ({ state: { number }}) => (<div className="green">{ number }</div>)
     }
   </Consumer>
 );
@@ -47,7 +49,7 @@ class App extends Component {
         <div className="red">
           <Consumer>
             {
-              ({ number }) => <div>{number}</div>
+              (context) => <div>{context.state.number}</div>
             }
           </Consumer>
           <MrBlue/>
