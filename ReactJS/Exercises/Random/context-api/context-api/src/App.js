@@ -5,6 +5,9 @@ const { Provider, Consumer } = React.createContext();
 class AppProvider extends Component {
   state = {
     number: 10,
+    inc: () => {
+      this.setState({ number: this.state.number + 1 });
+    }
   }
 
   render() {
@@ -26,6 +29,13 @@ const MrGreen = () => (
 
 const MrBlue = () => (
   <div className="blue">
+    <Consumer>
+      {
+        ({ inc }) => {
+          return (<button onClick={ inc }>Increase the number</button>);
+        }
+      }
+    </Consumer>
     <MrGreen />
   </div>
 );
