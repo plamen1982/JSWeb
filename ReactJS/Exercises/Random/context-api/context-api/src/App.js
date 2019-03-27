@@ -14,7 +14,7 @@ class AppProvider extends Component {
         inc: () => {
           this.setState({ number: this.state.number + 1 });
         }
-        }} >
+        }}>
         {this.props.children}
       </Provider>
     );
