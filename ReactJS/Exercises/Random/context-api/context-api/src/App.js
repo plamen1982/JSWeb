@@ -6,7 +6,7 @@ class AppProvider extends Component {
   state = {
     number: 10,
   }
-
+//test
   render() {
     return (
       <Provider value={{
