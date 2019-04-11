@@ -13,7 +13,7 @@ export class HeroService {
  
   constructor() { }
  
-  getHeroes(): Hero[] {
-    return HEROES;
+  getHeroes(): Observable<Hero[]> {
+    return of(HEROES);
   }
 }
